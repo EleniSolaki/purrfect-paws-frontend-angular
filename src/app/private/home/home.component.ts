@@ -9,6 +9,8 @@ import { IgxButtonModule } from 'igniteui-angular';
 import {orderBy} from 'lodash-es'
 
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -71,6 +73,64 @@ addToFavorites(): void {}
   //   this.isPressed = !this.isPressed;
   // }
 
+handleGenderSelection(gender: string) {
+  const trimmedGender = gender.trim();
+  console.log('Selected gender:', trimmedGender);
+  this.appService.setIsLoading(true); // Set loading state
+
+  this.subscription = this.service.getByGender(trimmedGender).subscribe({
+    next: (animalList: Animal[]) => {
+      this.animals = animalList;
+      console.log(this.animals);
+    },
+    error: (error) => {
+      console.log(error);
+    },
+    complete: () => {
+      this.appService.setIsLoading(false); // Clear loading state
+      console.log("API call completed");
+    }
+  });
+}
+
+handleAgeSelection(age: string) {
+  const trimmedAge = age.trim();
+  console.log('Selected age:', trimmedAge);
+  this.appService.setIsLoading(true); 
+
+  this.subscription = this.service.getByAge(trimmedAge).subscribe({
+    next: (animalList: Animal[]) => {
+      this.animals = animalList;
+      console.log(this.animals);
+    },
+    error: (error) => {
+      console.log(error);
+    },
+    complete: () => {
+      this.appService.setIsLoading(false); 
+      console.log("API call completed");
+    }
+  });
+}
+
+handleBreedSelection(breed: string) {
+  console.log('Selected breed:', breed);
+  this.appService.setIsLoading(true); 
+
+  this.subscription = this.service.getByBreed(breed).subscribe({
+    next: (animalList: Animal[]) => {
+      this.animals = animalList;
+      console.log(this.animals);
+    },
+    error: (error) => {
+      console.log(error);
+    },
+    complete: () => {
+      this.appService.setIsLoading(false); 
+      console.log("API call completed");
+    }
+  });
+}
 
 
   ngOnDestroy(): void {

@@ -4,7 +4,7 @@
 
 
 <div *ngIf="animals.length">
-    <table class="table table-striped">
+    <table class="table table-striped position-relative">
         <thead>
             <th scope="col">
               <span>Sort by:</span>
@@ -12,9 +12,45 @@
               <button (click)="toggleSort('breed')" igxButton="outlined" class="m-1">Breed
 
               </button>
-            </th>
+          
 
 
+<div class="float-end position-absolute top-0 end-0">
+  <div class="btn-group me-1">
+  <button igxButton="flat" (click)="ngOnInit()" type="button" class="btn btn-secondary p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Get All</span>
+  </button>
+</div>
+<div class="btn-group me-1">
+  <button igxButton="flat" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Gender</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item"  (click)="handleGenderSelection('Male')">Male</a></li>
+    <li><a class="dropdown-item" (click)="handleGenderSelection('Female')">Female</a></li>
+  </ul>
+</div>
+<div class="btn-group me-1">
+  <button igxButton="flat" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Age</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" (click)="handleAgeSelection('Young')">Young</a></li>
+    <li><a class="dropdown-item"(click)="handleAgeSelection('Adult')">Adult</a></li>
+  </ul>
+</div>
+<div class="btn-group me-1">
+  <button igxButton="flat" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Breed</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" (click)="handleBreedSelection('European Shorthair')">European Shorthair</a></li>
+    <li><a class="dropdown-item" (click)="handleBreedSelection('Ragdoll')">Ragdoll</a></li>
+    <li><a class="dropdown-item" (click)="handleBreedSelection('Aegean cat')">Aegean cat</a></li>
+  </ul>
+</div>
+</div>
+  </th>
 
         </thead>
 

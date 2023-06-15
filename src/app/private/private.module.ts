@@ -12,13 +12,14 @@ import { PrivateService } from './private.service';
 
 
 
+
 @NgModule({
   declarations: [
     FavoritesComponent
   ],
   imports: [
     CommonModule,
-    IgxButtonModule
+    IgxButtonModule,
     //RouterModule.forChild(routes)
   ],
   providers:[

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PublicModule } from './public/public.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MyServiceService } from './my-service.service';
+import { NgxPopper } from 'angular-popper';
 
 
 import { SharedModule } from 'shared';
@@ -63,7 +64,8 @@ import { PrivateService } from './private/private.service';
     BrowserModule,
 	BrowserAnimationsModule,
   IgxIconModule,
-	IgxRippleModule
+	IgxRippleModule,
+  NgxPopper,
   ],
   providers: [
     MyServiceService,
