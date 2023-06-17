@@ -7,7 +7,7 @@ import { WelcomeComponent } from "./public/welcome/welcome.component";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { tap } from 'rxjs';
 import { MyServiceService } from "./my-service.service";
-import { FavoritesComponent } from "./favorites/favorites.component";
+import { FavoritesComponent } from "./private/favorites/favorites.component";
 
 
 

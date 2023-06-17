@@ -12,7 +12,6 @@ export class AppComponent {
   title = 'Animal Adoption Logo';
   menu = menu;
   
-
   isLoggedIn$ = this.service.isLoggedIn$;
   loggedInUsername$ = this.service.loggedInUsername$
   isLoading$ = this.service.isLoading$;

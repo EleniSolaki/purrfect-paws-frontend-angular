@@ -23,7 +23,11 @@ import {
 	IgxRippleModule
  } from "igniteui-angular";
 import { PrivateService } from './private/private.service';
-
+import { CommonModule } from '@angular/common';
+import { FavoritesComponent } from './private/favorites/favorites.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.component';
 
 
 
@@ -48,7 +52,9 @@ import { PrivateService } from './private/private.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    FavoritesComponent,
+    PageNotFoundComponent,
+    StartInquiryComponent
   ],
   imports: [
     BrowserModule,
@@ -62,10 +68,13 @@ import { PrivateService } from './private/private.service';
     BrowserAnimationsModule,
     IgxButtonModule,
     BrowserModule,
-	BrowserAnimationsModule,
-  IgxIconModule,
-	IgxRippleModule,
-  NgxPopper,
+	  BrowserAnimationsModule,
+    IgxIconModule,
+	  IgxRippleModule,
+    NgxPopper,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [
     MyServiceService,

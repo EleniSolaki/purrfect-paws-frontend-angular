@@ -82,7 +82,7 @@
         <li class="list-group-item">Gender: {{ animal.gender }}</li>
       </ul>
       <div class="card-body d-flex justify-content-center align-items-center">
-        <button class="btn" (click)="addToFavorites()" igxButton="fab">
+        <button class="btn" (click)="addToFavorites(animal.id)" igxButton="fab">
           <span>Add to favorites</span>
           <igx-icon fontSet="material">favorite</igx-icon>
         </button>

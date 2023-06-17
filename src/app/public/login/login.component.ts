@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MyServiceService } from 'src/app/my-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDTO } from 'shared';
+import { LoginDTO, UserDTO } from 'shared';
 
 
 
@@ -26,11 +26,11 @@ export class LoginComponent {
 onSubmit(): void {
   //console.log(this.form.value);
   // const { email, password } = this.form.value;
-      const userDTO: UserDTO = {
+      const loginDTO: LoginDTO = {
       email: this.form.get('email')!.value,
       password: this.form.get('password')!.value
     };
-  this.service.login(userDTO);
+  this.service.login(loginDTO);
 }
 
 

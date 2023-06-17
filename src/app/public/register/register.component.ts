@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MyServiceService } from '../../my-service.service';
-import { UserDTO } from 'shared';
+import { RegisterDTO, UserDTO } from 'shared';
 
 
 @Component({
@@ -22,13 +22,13 @@ constructor(private formBuilder: FormBuilder, private service: MyServiceService)
 }
 
 save() {
-    const userDTO: UserDTO = {
+    const registerDTO: RegisterDTO = {
       username: this.form.get('username')!.value,
       email: this.form.get('email')!.value,
       password: this.form.get('password')!.value
     };
 
-    this.service.save(userDTO);
+    this.service.save(registerDTO);
     this.form.reset();
   }
   // save()

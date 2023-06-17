@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, switchMap, tap, throwError } from 'rxjs';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
-import { UserDTO } from 'shared';
+import { LoginDTO, RegisterDTO, UserDTO } from 'shared';
 import { LoginMessage } from 'shared';
 
 
@@ -16,9 +16,6 @@ const USER_API = "http://localhost:8080/api/user"
   providedIn: 'root'
 })
 export class MyServiceService {
-  // username: string="";
-  // email: string="";
-  // password: string="";
 
   private currentUser : UserDTO | undefined;
 
@@ -41,13 +38,13 @@ export class MyServiceService {
     return !!this.currentUser;
   }
 
- getCurrentUser(): UserDTO {
+  getCurrentUser(): UserDTO {
     return this.currentUser as UserDTO;
   }
 
 
-save(userDTO: UserDTO) {
-    this.http.post(`${REGISTER_API}`, userDTO, { responseType: 'text' }).subscribe((resultData: any) => {
+  save(registerDTO: RegisterDTO) {
+    this.http.post(`${REGISTER_API}`, registerDTO, { responseType: 'text' }).subscribe((resultData: any) => {
       alert("User Registered Successfully");
     });
   }
@@ -55,25 +52,26 @@ save(userDTO: UserDTO) {
 
 
 
-login(userDTO: UserDTO): void {
+login(loginDTO: LoginDTO): void {
   this.setIsLoading(true);
-  this.http.post<any>(`${LOGIN_API}`, userDTO)
+  this.http.post<any>(`${LOGIN_API}`, loginDTO)
       .subscribe({
         next: (response) => {
           const loginMessage: LoginMessage = response;
 
           if (loginMessage.status) {
+
             this.loggedInSubject.next(true);
             this.alertService.newAlert({
               type: 'success',
-              heading: `Welcome ${userDTO.email}`,
+              heading: `Welcome ${loginDTO.email}`,
               text: 'Nice to see you again!',
             });
+            console.log(response);
             this.currentUser = {
-            id: userDTO.id,  
-            username: userDTO.username,
-            email: userDTO.email,
-            password: userDTO.password
+            id: response.userid,  
+            username: response.userUsername,
+            email: response.userEmail,
     };
     console.log("current user:",this.currentUser);
             this.router.navigate(['/home']);

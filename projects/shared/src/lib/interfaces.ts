@@ -11,15 +11,29 @@ export interface Alert{
 }
 
 export interface UserDTO {
-    id?:number;
-    username?: string;
+    id:number;
+    username: string;
+    email: string;
+    password?: string;
+}
+
+export interface LoginDTO{
     email: string;
     password: string;
+}
+
+export interface RegisterDTO{
+    email: string;
+    password: string;
+    username: string;
 }
 
 export interface LoginMessage{
     message: string;
     status:boolean;
+    id: number;
+    username: string;
+    email: string;
 }
 
 export interface Animal{
@@ -30,6 +44,12 @@ export interface Animal{
     gender: string;
     image: string;
     description: string;
+}
+
+export interface FavoriteAnimal {
+    id: number;
+    user: UserDTO;
+    animal: Animal;
 }
 
 export interface Favorite {

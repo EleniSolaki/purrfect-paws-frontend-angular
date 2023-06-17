@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { UiComponent } from './ui.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AlertComponent } from './alert/alert.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -16,7 +17,8 @@ import { AlertComponent } from './alert/alert.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule
+    RouterModule,
+    MatIconModule,
   ],
   exports: [
     UiComponent,

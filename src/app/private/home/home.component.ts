@@ -19,9 +19,8 @@ import {orderBy} from 'lodash-es'
 export class HomeComponent implements OnInit, OnDestroy{
 
   //user :UserDTO;
-  constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router){}
+  constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router, ){}
 
-  loading = false;
   animals : Animal[] = [];
   subscription: Subscription | undefined
 
@@ -30,8 +29,11 @@ breedSortType: 'asc' | 'desc' = 'asc';
 
 
 ngOnInit(): void {
-  console.log('Starting "findAllAnimals" API call');
-  // this.loading = true;
+  this.getData();
+}
+
+getData(): void {
+    console.log('Starting "findAllAnimals" API call');
   this.appService.setIsLoading(true);
   this.subscription = this.service.getAllAnimals().subscribe({
     next: (animalList: Animal[]) => {
@@ -39,39 +41,56 @@ ngOnInit(): void {
       console.log(this.animals);
     },
     error: (error) => {
-      // this.loading = false; 
       this.appService.setIsLoading(false);
       console.log(error);
     },
     complete: () => {
-      // this.loading = false; 
       this.appService.setIsLoading(false);
       console.log("API call completed");
     }
   });
 }
-addToFavorites(): void {}
-  // addToFavorites(): void {
-  //   const userId = getCurrentUserId(); // Replace with your logic to get the current user ID
-  //   const animalId = getAnimalId(); // Replace with your logic to get the animal ID
 
-  //   this.service.saveFavoriteAnimal(userId, animalId)
-  //     .subscribe(
-  //       response => {
-  //         console.log('Animal added to favorites successfully:', response);
-  //         // Handle success
-  //       },
-  //       error => {
-  //         console.error('Failed to add animal to favorites:', error);
-  //         // Handle error
-  //       }
-  //     )
 
-//isPressed = false;
+addToFavorites(animal:number): void {
+    const userId = this.appService.getCurrentUser().id; 
 
-  // togglePress() {
-  //   this.isPressed = !this.isPressed;
-  // }
+    console.log("component, userid, animalid",userId, animal);
+
+    this.service.saveFavoriteAnimal(animal, userId).subscribe({
+    next: (animalList: Animal[]) => {
+      this.animals = animalList;
+      console.log("animals component",this.animals);
+    },
+    error: (error) => {
+      this.appService.setIsLoading(false);
+      console.log("Error adding to favorites",error);
+    },
+    complete: () => {
+      this.appService.setIsLoading(false);
+      console.log("API call completed");
+      this.getData();
+    }
+  });
+
+
+      // .subscribe(
+      //   response => {
+      //     console.log('Animal added to favorites successfully:', response);
+          
+      //   },
+      //   error => {
+      //     console.error('Failed to add animal to favorites:', error);
+      //     // Handle error
+      //   }
+      // )
+
+// isPressed = false;
+
+//   togglePress() {
+//     this.isPressed = !this.isPressed;
+//   }
+}
 
 handleGenderSelection(gender: string) {
   const trimmedGender = gender.trim();

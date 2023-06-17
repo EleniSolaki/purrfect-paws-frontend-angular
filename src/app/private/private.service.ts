@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, throwError } from 'rxjs';
-import { Animal, UserDTO } from 'shared';
+import { Observable, catchError, delay, map, throwError } from 'rxjs';
+import { Animal, FavoriteAnimal, UserDTO } from 'shared';
 import { MyServiceService } from '../my-service.service';
+import { UiService } from 'ui';
 
 const ANIMAL_API = 'http://localhost:8080/api'
 const FAVORITES_API = 'http://localhost:8080/api/favorite-animals'
@@ -16,15 +17,11 @@ const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animalbreed'
   providedIn: 'root'
 })
 export class PrivateService {
-  private user : UserDTO | null = null;
+  
 
-  animal?: Animal;
+  constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService,) { }
 
-  constructor(private http: HttpClient, private appService: MyServiceService) { }
-
-  private SAVE_TO_FAVS_API = 'http://localhost:8080/api/favorite-animals'
-
-
+  
 
 getAllAnimals(): Observable<Animal[]> {
   return this.http.get<Animal[]>(`${ANIMAL_API}/animals`).pipe(
@@ -32,20 +29,6 @@ getAllAnimals(): Observable<Animal[]> {
   );
 }
 
-getAllFavoriteAnimals(): Observable<Animal[]> {
-    const userId = this.appService.getCurrentUser()?.id;
-    if (!userId) {
-      return throwError(() => new Error('User is not available.')) as Observable<Animal[]>;
-
-    }
-
-    return this.http.get<Animal[]>(`${FAVORITES_API}/${userId}`).pipe(
-      catchError((error) => {
-        console.error('Error fetching favorite animals:', error);
-        return throwError(() => new Error('Error fetching favorite animals. Please try again.')) as Observable<Animal[]>;
-      })
-      );
-  }
 
   getByGender(gender: string): Observable<Animal[]> {
   return this.http.get<Animal[]>(`${ANIMALS_GENDER_API}/${gender}`).pipe(
@@ -64,22 +47,79 @@ getAllFavoriteAnimals(): Observable<Animal[]> {
   );
 }
 
-//  saveFavoriteAnimal(animalId: number): Observable<any> {
-//     if (this.appService.isLoggedIn()) {
-//       const userId = this.user.id;
-//       const animalId = this.animal.id;
-      
-//       const body = new HttpParams()
-//         .set('userId', userId.toString())
-//         .set('animalId', animalId.toString());
 
-//       const headers = new HttpHeaders()
-//         .set('Content-Type', 'application/x-www-form-urlencoded');
+saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
+  if (this.appService.isLoggedIn()) {
+    userId = this.appService.getCurrentUser().id;
+    console.log("userid save favorites:", userId);
+    console.log("animalid save favorites:", animalId);
+    const params = new HttpParams()
+      .set('userId', userId.toString())
+      .set('animalId', animalId.toString());
 
-//       return this.http.post<any>(this.apiUrl, body.toString(), { headers });
-//     }
-//     // Handle case when user is not logged in
-//     return Observable.throw('User is not logged in.');
-//   }
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.post<any>(`${FAVORITES_API}`, null, { headers, params }).pipe(
+      map(response => {
+        this.alertService.newAlert({
+          type: 'success',
+          text: 'Animal saved successfully',
+        });
+        return response.data;
+      }),
+      catchError((error) => {
+        if (error.status === 403) {
+          console.log('Animal already exists.');
+          this.alertService.newAlert({
+            type: 'warning',
+            text: 'This animal is already saved',
+          });
+        }
+        return throwError(() => error);
+      })
+    );
+  } else {
+    this.alertService.newAlert({
+      type: 'danger',
+      text: 'You must be logged in to save favorite animals.',
+    });
+    return throwError(() => new Error('Error saving favorite animals. Please try again.')) as Observable<any>;
+  }
+}
+
+
+
+
+
+
+
+
+
+getAllFavoriteAnimals(): Observable<Animal[]> {
+    const userId = this.appService.getCurrentUser()?.id;
+    if (!userId) {
+      return throwError(() => new Error('User is not available.')) as Observable<Animal[]>;
+
+    }
+
+    return this.http.get<Animal[]>(`${FAVORITES_API}/${userId}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching favorite animals:', error);
+        return throwError(() => new Error('Error fetching favorite animals. Please try again.')) as Observable<Animal[]>;
+      })
+      );
+  }
+
+
+deleteFromFavorites(userId:number, animalId:number){
+  userId = this.appService.getCurrentUser()?.id;
+      return this.http.delete<any>(`${FAVORITES_API}/${userId}/animals/${animalId}`).pipe(
+      catchError((error) => {
+        console.error('Error deleting favorite animals:', error);
+        return throwError(() => new Error('Error deleting favorite animals. Please try again.')) 
+      })
+      );
+}  
 
 }
