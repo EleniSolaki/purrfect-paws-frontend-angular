@@ -30,18 +30,18 @@ export class FavoritesComponent implements OnInit {
 
 getData(): void {
     console.log('Starting "findAllFavoriteAnimals" API call');
-  //this.appService.setIsLoading(true);
+  this.appService.setIsLoading(true);
   this.subscription = this.service.getAllFavoriteAnimals().subscribe({
   next: (response: any) => {
       this.favoriteAnimals = response;
       console.log("component after subscribe", this.favoriteAnimals);
     },
     error: (error) => {
-     // this.appService.setIsLoading(false);
+      this.appService.setIsLoading(false);
       console.log(error);
     },
     complete: () => {
-      //this.appService.setIsLoading(false);
+      this.appService.setIsLoading(false);
       console.log("API call completed");
     }
   });

@@ -131,9 +131,27 @@ initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
 }
 
 
-adoptionInquiry(claimInterest: ClaimInterestRequest):  Observable<void>{
-   return this.http.post<void>(`${FORM_API}`, claimInterest);
+adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
+  return this.http.post<void>(`${FORM_API}`, claimInterest).pipe(
+    tap(() => {
+      this.alertService.newAlert({
+        type: 'success',
+        text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
+      });
+    }),
+    catchError((error) => {
+      console.error(error, 'error in inquiry');
+      this.alertService.newAlert({
+        type: 'danger',
+        text: 'Error submitting your claim of interest. Please try again.',
+      });
+      return throwError(() => error);
+    })
+  );
 }
+
+
+
 }
 
 
