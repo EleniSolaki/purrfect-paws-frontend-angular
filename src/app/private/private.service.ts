@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
-import { Animal, FavoriteAnimal, UserAnimalData, UserDTO } from 'shared';
+import { Animal, ClaimInterestRequest, FavoriteAnimal, UserAnimalData, UserDTO } from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
@@ -128,6 +128,11 @@ initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
     tap(response => {
       console.log('Response:', response);  })
   );
+}
+
+
+adoptionInquiry(claimInterest: ClaimInterestRequest):  Observable<string>{
+   return this.http.post<any>(`${FORM_API}`, claimInterest);
 }
 }
 

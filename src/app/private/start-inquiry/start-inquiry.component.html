@@ -1,5 +1,6 @@
 <div class="container">
-    <form>
+    <form [formGroup]="form"
+    (ngSubmit)="onSubmit()">
 <div class="form-group">
   <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label"><strong>Email</strong></label>
@@ -17,7 +18,7 @@
 
   <div class="form-group">
     <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="otherpets">
   <label class="form-check-label" for="defaultCheck1">
     Other pets boolean
   </label>
@@ -26,8 +27,8 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Please tell us a bit about yourself</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="comments"></textarea>
   </div>
-  <button type="button" class="btn btn-success">Send your inquiry</button>
+  <button type="submit">Send your inquiry</button>
 </form>
 </div>

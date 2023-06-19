@@ -64,3 +64,11 @@ export interface UserAnimalData {
     email: string;
     name: string;
 }
+
+
+export interface ClaimInterestRequest {
+    user: { id: number };
+    animal: { id: number };
+    comments: string;
+    otherPetsAtHome: boolean;
+}
