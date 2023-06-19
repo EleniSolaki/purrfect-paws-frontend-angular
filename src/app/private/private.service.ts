@@ -131,8 +131,8 @@ initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
 }
 
 
-adoptionInquiry(claimInterest: ClaimInterestRequest):  Observable<string>{
-   return this.http.post<any>(`${FORM_API}`, claimInterest);
+adoptionInquiry(claimInterest: ClaimInterestRequest):  Observable<void>{
+   return this.http.post<void>(`${FORM_API}`, claimInterest);
 }
 }
 

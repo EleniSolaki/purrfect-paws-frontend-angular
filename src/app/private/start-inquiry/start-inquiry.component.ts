@@ -58,8 +58,8 @@ onSubmit(): void {
     };
 
     this.service.adoptionInquiry(claimInterestRequest).subscribe({
-      next: response => {
-        console.log(response,"success in inquiry");
+      next: () => {
+        console.log("success in inquiry");
       },
       error: error => {
         console.error(error,"error in inquiry");
