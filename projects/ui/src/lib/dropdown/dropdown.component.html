@@ -1,21 +1,19 @@
-<li class="nav-item dropdown">
-    <!-- <a
-    class="nav-link dropdown-toggle"
-    href="#"
-    id="navbarDropdown"
-    role="button"
-    data-bs-toggle="dropdown"
-    aria-expanded="false">
-    {{ dropdownLabel }}
-    </a> -->
+<!-- <li class="nav-item dropdown">
         <a data-bs-toggle="dropdown"
-    aria-expanded="false" id="navbarDropdown" class="nav-link " mat-icon-button color="accent" aria-label="menu icon" >
+    aria-expanded="false" id="navbarDropdown" class="nav-link " 
+    mat-icon-button color="accent" aria-label="menu icon" >
         <mat-icon>menu</mat-icon>
         
 </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li *ngFor="let item of items">
-            <a class="dropdown-item" routerLink="{{ item.link }}">{{ item.text }}</a>
+        <li *ngFor="let item of items" >
+            <a class="dropdown-item" routerLink="{{ item.link }}" >{{ item.text }}</a>
         </li>
     </ul>
-</li>
+</li> -->
+
+
+<button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+<mat-menu #menu="matMenu" >
+  <button mat-menu-item *ngFor="let item of items" [routerLink]="item.link">{{ item.text }}</button>
+</mat-menu>

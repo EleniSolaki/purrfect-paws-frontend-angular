@@ -4,28 +4,24 @@
         <tbody>
 
 <div class="row">
-  <div *ngFor="let favanimal of favoriteAnimals" class="col-sm-4 mb-4">
-    <div class="card">
-      <img class="card-img-top" [src]="favanimal.image" alt="Pet image">
+  <div *ngFor="let favanimal of favoriteAnimals" class="col-sm-3 mb-4">
+    <div class="card h-100 d-flex flex-column">
+      <img class="card-img-top" [src]="favanimal.image" alt="Cat image" style="max-height: 210px; max-width:303px">
       <div class="card-body">
         <h5 class="card-title">{{ favanimal.name }}</h5>
         <p class="card-text">{{ favanimal.description }}</p>
       </div>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush ">
         <li class="list-group-item">Breed: {{ favanimal.breed }}</li>
         <li class="list-group-item">Age: {{ favanimal.age }}</li>
         <li class="list-group-item">Gender: {{ favanimal.gender }}</li>
       </ul>
       <div class="card-body d-flex justify-content-center align-items-center">
-        <!-- <button class="btn" (click)="deleteFromFavorites(favanimal.id)" igxButton="fab">
-          <span>Delete from favorites</span>
-          <igx-icon fontSet="material">favorite</igx-icon>
-        </button> -->
         <button mat-fab color="primary" (click)="deleteFromFavorites(favanimal.id)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button class="btn" (click)="inquireTheAnimal()" >
-          <a href="" class="card-link">Start your inquiry</a>
+        <button class="btn" (click)="inquireTheAnimal(favanimal.id)" >
+          Start your inquiry
         </button>
       </div>
     </div>

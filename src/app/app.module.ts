@@ -17,17 +17,19 @@ import { UiModule } from 'ui';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { 
-	IgxButtonModule,
-	IgxIconModule,
-	IgxRippleModule
- } from "igniteui-angular";
+// import { 
+// 	IgxButtonModule,
+// 	IgxIconModule,
+// 	IgxRippleModule
+//  } from "igniteui-angular";
 import { PrivateService } from './private/private.service';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './private/favorites/favorites.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.component';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 
 
@@ -66,15 +68,17 @@ import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.com
     UiModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    IgxButtonModule,
+    // IgxButtonModule,
     BrowserModule,
 	  BrowserAnimationsModule,
-    IgxIconModule,
-	  IgxRippleModule,
+    // IgxIconModule,
+	  // IgxRippleModule,
     NgxPopper,
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [
     MyServiceService,

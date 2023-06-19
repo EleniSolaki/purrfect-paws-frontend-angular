@@ -8,6 +8,8 @@ import { Router, RouterModule, Routes} from '@angular/router';
 import { MyServiceService } from '../my-service.service';
 import { tap } from 'rxjs';
 import { HomeComponent } from '../private/home/home.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -39,6 +41,8 @@ import { HomeComponent } from '../private/home/home.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    MatIconModule
    // RouterModule.forChild(routes)
   ],
   providers: [

@@ -1,15 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import{ Subscription } from 'rxjs'
-//import {orderBy} from 'lodash-es'
 import { MyServiceService } from 'src/app/my-service.service';
 import { PrivateService } from '../private.service';
-import { Animal, UserDTO } from 'shared';
+import { Animal } from 'shared';
 import { Router } from '@angular/router';
-import { IgxButtonModule } from 'igniteui-angular';
 import {orderBy} from 'lodash-es'
 
 
-
+enum AgeEnum {
+  TwoYearsOld = '2 years old',
+  ThreeYearsOld = '3 years old',
+  NineYearsOld = '9 years old'
+}
 
 @Component({
   selector: 'app-home',
@@ -18,11 +20,11 @@ import {orderBy} from 'lodash-es'
 })
 export class HomeComponent implements OnInit, OnDestroy{
 
-  //user :UserDTO;
-  constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router, ){}
+constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router, ){}
 
-  animals : Animal[] = [];
-  subscription: Subscription | undefined
+animals : Animal[] = [];
+subscription: Subscription | undefined
+
 
 ageSortType: 'asc' | 'desc' = 'asc';
 breedSortType: 'asc' | 'desc' = 'asc';
@@ -73,30 +75,12 @@ addToFavorites(animal:number): void {
     }
   });
 
-
-      // .subscribe(
-      //   response => {
-      //     console.log('Animal added to favorites successfully:', response);
-          
-      //   },
-      //   error => {
-      //     console.error('Failed to add animal to favorites:', error);
-      //     // Handle error
-      //   }
-      // )
-
-// isPressed = false;
-
-//   togglePress() {
-//     this.isPressed = !this.isPressed;
-//   }
 }
 
 handleGenderSelection(gender: string) {
   const trimmedGender = gender.trim();
   console.log('Selected gender:', trimmedGender);
-  this.appService.setIsLoading(true); // Set loading state
-
+  this.appService.setIsLoading(true); 
   this.subscription = this.service.getByGender(trimmedGender).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
@@ -106,7 +90,7 @@ handleGenderSelection(gender: string) {
       console.log(error);
     },
     complete: () => {
-      this.appService.setIsLoading(false); // Clear loading state
+      this.appService.setIsLoading(false); 
       console.log("API call completed");
     }
   });
@@ -159,20 +143,47 @@ handleBreedSelection(breed: string) {
 
 
 
-toggleSort(key:string){
+// toggleSort(key:string){
+//   switch (key) {
+//     case 'age':
+//       this.ageSortType = this.ageSortType === 'asc' ? 'desc' : 'asc';
+//       this.animals = orderBy(this.animals, [key], [this.ageSortType])
+//       break;
+//       case 'breed':
+//       this.breedSortType = this.breedSortType === 'asc' ? 'desc' : 'asc';
+//       this.animals = orderBy(this.animals, [key], [this.breedSortType])
+//       break;  
+//       default:
+//       break;
+//   }
+// }
+
+toggleSort(key: string) {
   switch (key) {
     case 'age':
       this.ageSortType = this.ageSortType === 'asc' ? 'desc' : 'asc';
-      this.animals = orderBy(this.animals, [key], [this.ageSortType])
+      this.animals = orderBy(this.animals, [(animal: any) => {
+        switch (animal.age) {
+          case AgeEnum.TwoYearsOld:
+            return 2;
+          case AgeEnum.ThreeYearsOld:
+            return 3;
+          case AgeEnum.NineYearsOld:
+            return 9;
+          default:
+            return 0;
+        }
+      }], [this.ageSortType]);
       break;
-      case 'breed':
+    case 'breed':
       this.breedSortType = this.breedSortType === 'asc' ? 'desc' : 'asc';
-      this.animals = orderBy(this.animals, [key], [this.breedSortType])
-      break;  
-      default:
+      this.animals = orderBy(this.animals, [key], [this.breedSortType]);
+      break;
+    default:
       break;
   }
 }
+
 
 
 

@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { tap } from 'rxjs';
 import { MyServiceService } from "./my-service.service";
 import { FavoritesComponent } from "./private/favorites/favorites.component";
+import { StartInquiryComponent } from "./private/start-inquiry/start-inquiry.component";
 
 
 
@@ -27,14 +28,17 @@ const userGuard = () => {
 const routes: Routes = [
   // {path: '', loadChildren:()=> import('./public/public.module').then((m)=> m.PublicModule)
   // },
-  {path: '', component: WelcomeComponent},
+  
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
     {path :'home', component: HomeComponent},
         // {path :'home', component: HomeComponent, canActivate: [userGuard]},
 // {path: 'favorites', component: FavoritesComponent, canActivate: [userGuard]},
     {path: 'favorites', component: FavoritesComponent},
+      {path: 'start-inquiry', component: StartInquiryComponent},
+      {path: '', component: WelcomeComponent},
   { path: '**', component:PageNotFoundComponent }
+
 
 
 ];

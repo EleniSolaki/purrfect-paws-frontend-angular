@@ -23,9 +23,11 @@ export interface LoginDTO{
 }
 
 export interface RegisterDTO{
+    firstname: string;
+    lastname: string;
+    username: string;
     email: string;
     password: string;
-    username: string;
 }
 
 export interface LoginMessage{
@@ -55,4 +57,10 @@ export interface FavoriteAnimal {
 export interface Favorite {
     userId: number;
     animalId: number;
+}
+
+
+export interface UserAnimalData {
+    email: string;
+    name: string;
 }

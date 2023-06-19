@@ -68,16 +68,8 @@ deleteFromFavorites(animalId: number): void {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-inquireTheAnimal(){}
+inquireTheAnimal(animalId:number){
+this.service.inquireAnAnimal(animalId)
+}
 
 }

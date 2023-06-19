@@ -11,6 +11,8 @@ import { MyServiceService } from './my-service.service';
 export class AppComponent {
   title = 'Animal Adoption Logo';
   menu = menu;
+  linkedinLink = 'https://www.linkedin.com/in/eleni-solaki/'
+  githubLink= 'https://github.com/EleniSolaki';
   
   isLoggedIn$ = this.service.isLoggedIn$;
   loggedInUsername$ = this.service.loggedInUsername$

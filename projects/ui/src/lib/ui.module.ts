@@ -6,7 +6,8 @@ import { UiComponent } from './ui.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AlertComponent } from './alert/alert.component';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserModule,
     RouterModule,
     MatIconModule,
+    MatButtonModule, MatMenuModule
   ],
   exports: [
     UiComponent,

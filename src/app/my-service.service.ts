@@ -46,6 +46,7 @@ export class MyServiceService {
   save(registerDTO: RegisterDTO) {
     this.http.post(`${REGISTER_API}`, registerDTO, { responseType: 'text' }).subscribe((resultData: any) => {
       alert("User Registered Successfully");
+      this.router.navigate(['/login']);
     });
   }
 

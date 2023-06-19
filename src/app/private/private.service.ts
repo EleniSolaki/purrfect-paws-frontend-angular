@@ -1,15 +1,17 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, map, throwError } from 'rxjs';
-import { Animal, FavoriteAnimal, UserDTO } from 'shared';
+import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
+import { Animal, FavoriteAnimal, UserAnimalData, UserDTO } from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
+import { Router } from '@angular/router';
 
 const ANIMAL_API = 'http://localhost:8080/api'
 const FAVORITES_API = 'http://localhost:8080/api/favorite-animals'
 const ANIMALS_GENDER_API = 'http://localhost:8080/api/animalsgender'
 const ANIMAS_BY_AGE_API = 'http://localhost:8080/api/animalage'
 const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animalbreed'
+const FORM_API = "http://localhost:8080/api/claim-interest" 
 
 
 
@@ -19,7 +21,7 @@ const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animalbreed'
 export class PrivateService {
   
 
-  constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService,) { }
+  constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router) { }
 
   
 
@@ -64,7 +66,7 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
       map(response => {
         this.alertService.newAlert({
           type: 'success',
-          text: 'Animal saved successfully',
+          text: 'Cat saved successfully',
         });
         return response.data;
       }),
@@ -73,7 +75,7 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
           console.log('Animal already exists.');
           this.alertService.newAlert({
             type: 'warning',
-            text: 'This animal is already saved',
+            text: 'This cat is already saved',
           });
         }
         return throwError(() => error);
@@ -87,12 +89,6 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
     return throwError(() => new Error('Error saving favorite animals. Please try again.')) as Observable<any>;
   }
 }
-
-
-
-
-
-
 
 
 
@@ -122,4 +118,20 @@ deleteFromFavorites(userId:number, animalId:number){
       );
 }  
 
+
+inquireAnAnimal(animalId:number){
+  this.router.navigate(['start-inquiry'],  { queryParams: { pet: `${animalId}` } });
 }
+
+initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
+  return this.http.get<UserAnimalData[]>(`${FORM_API}?userId=${userId}&animalId=${animalId}`).pipe(
+    tap(response => {
+      console.log('Response:', response);  })
+  );
+}
+}
+
+
+
+
+

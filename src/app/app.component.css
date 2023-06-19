@@ -5,3 +5,12 @@
     width: 85%;
     bottom: 10px;
 }
+
+.social-icons{
+    margin-top: 10px;
+}
+
+.linkedin-icon svg,
+.github-icon svg {
+  margin-right: 10px;
+}

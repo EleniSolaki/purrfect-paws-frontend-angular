@@ -27,7 +27,16 @@
 
 
 
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="save()" class="mx-auto w-50 border border-primary p-5">
+   <h6 class="h4 mb-4 text-center">Sign up</h6>
+    <div class="form-group p-2">
+    <label>Firstname</label>
+    <input type="text" class="form-control" formControlName="firstname" placeholder="Enter Firstname">
+  </div>
+   <div class="form-group p-2">
+    <label>Lastname</label>
+    <input type="text" class="form-control" formControlName="lastname" placeholder="Enter lastname">
+  </div>
   <div class="form-group p-2">
     <label>Username</label>
     <input type="text" class="form-control" formControlName="username" placeholder="Enter Username">
@@ -40,8 +49,9 @@
 
   <div class="form-group p-2">
     <label>Password</label>
-    <input type="password" class="form-control" formControlName="password" placeholder="Enter Password">
+    <input type="password" class="form-control" formControlName="password" placeholder="Must contain at least 8 characters">
   </div>
-
+  <div class="text-center">
   <button type="submit" class="btn btn-primary m-2" [disabled]="!form.valid">Sign up</button>
+  </div>
 </form>
