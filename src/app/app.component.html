@@ -1,6 +1,7 @@
-<div class="container mt-4">
+<div class="body-container">
+<div class="container main-container mt-4">
     <div class="row">
-    <nav class="p-2 navbar navbar-expand navbar-light bg-secondary justify-content-between">
+    <nav class="p-2 navbar navbar-expand navbar-light justify-content-between" style="background-color: #333; border-radius: 10px;">
         <span class="navbar-brand">
         <strong>
             <a href="#" routerLink="" class="text-decoration-none text-black">
@@ -58,16 +59,18 @@
     (dismiss)="onAlertDismiss(i)">
     </lib-alert>
     </div>
-    <router-outlet></router-outlet>
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 </div>
-  <footer class="bg-secondary text-center py-3 mt-4  relative-footer">
+  <footer class="footer">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <h4>Contact us</h4>
-          <div><a href = "mailto: purrfect@paws.com" class="text-decoration-none text-white fs-5 ">Email us</a></div>
-          <div><a href="tel:123-456-7890" class="text-decoration-none text-white fs-5">Call us</a></div>
+          <div><a href = "mailto: purrfect@paws.com" class="text-decoration-none text-white fs-6 ">Email</a></div>
+          <div><a href="tel:123-456-7890" class="text-decoration-none text-white fs-6">Call</a></div>
         </div>
         <div class="col-md-6">
           <h4>Follow Us</h4>
@@ -88,3 +91,4 @@
     </div>
     <p>&copy; 2023 Purrfect Paws. All rights reserved.</p>
   </footer>
+</div>

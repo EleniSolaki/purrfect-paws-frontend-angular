@@ -79,7 +79,7 @@
 <!-- <div class="card-group"> -->
   <div *ngFor="let animal of animals" class="col-sm-3 mb-4">
     <div class="card h-100  d-flex flex-column">
-      <img class="card-img-top" [src]="animal.image" alt="Cat image" style="max-height: 210px; max-width:303px">
+      <img class="card-img-top" [src]="animal.image" alt="Cat image" style="object-fit: cover;">
       <div class="card-body">
         <h5 class="card-title">{{ animal.name }}</h5>
         <p class="card-text" style="height:45px">{{ animal.description }}</p>
