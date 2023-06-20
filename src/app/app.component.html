@@ -5,7 +5,6 @@
         <span class="navbar-brand">
         <strong>
             <a href="#" routerLink="" class="text-decoration-none text-black">
-            <!-- {{ title }} -->
             <img src="assets/images/logo.svg" alt="Purrfect Paws Logo" class="logo-image">
             </a>
             </strong>
@@ -26,8 +25,8 @@
 
         <ng-template #loggedOut>
         <div class="d-flex align-items-center">
-            <a class="btn btn-primary btn-sm me-2" routerLink="/login">Login</a>
-            <a class="btn btn-secondary btn-sm" routerLink="/register">Sign up</a> 
+            <button mat-button color="primary" routerLink="/login">Login</button>
+            <button mat-button color="accent" routerLink="/register">Sign up</button>
         </div>
         </ng-template>
 

@@ -78,11 +78,11 @@
 <div class="row">
 <!-- <div class="card-group"> -->
   <div *ngFor="let animal of animals" class="col-sm-3 mb-4">
-    <div class="card h-100  d-flex flex-column">
+    <div class="card h-100  d-flex flex-column text-center">
       <img class="card-img-top" [src]="animal.image" alt="Cat image" style="object-fit: cover;">
       <div class="card-body">
-        <h5 class="card-title">{{ animal.name }}</h5>
-        <p class="card-text" style="height:45px">{{ animal.description }}</p>
+        <h2 class="card-title" >{{ animal.name }}</h2>
+        <p class="card-text" style="height:40px">{{ animal.description }}</p>
       </div>
       <ul class="list-group list-group-flush ">
         <li class="list-group-item">Breed: {{ animal.breed }}</li>
@@ -94,10 +94,11 @@
           <span>Add to favorites</span>
           <igx-icon fontSet="material">favorite</igx-icon>
         </button> -->
-
+<!-- <span>Add to favorites</span>
         <button mat-icon-button color="warn" (click)="addToFavorites(animal.id)" aria-label="add to favorites">
         <mat-icon >favorite</mat-icon>
-      </button>
+      </button> -->
+      <button mat-fab extended color="primary" (click)="addToFavorites(animal.id)" aria-label="add to favorites">Add to favorites<mat-icon >favorite</mat-icon></button>
       </div>
     </div>
   </div>
