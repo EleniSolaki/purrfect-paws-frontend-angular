@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, map, tap, throwError } from 'rxjs';
 import { Animal, ClaimInterestRequest, FavoriteAnimal, UserAnimalData, UserDTO } from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
@@ -23,7 +23,9 @@ export class PrivateService {
 
   constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router) { }
 
-  
+  private selectedAnimalSubject = new BehaviorSubject<string>('');
+  selectedAnimal$ = this.selectedAnimalSubject.asObservable()
+
 
 getAllAnimals(): Observable<Animal[]> {
   return this.http.get<Animal[]>(`${ANIMAL_API}/animals`).pipe(
@@ -123,12 +125,12 @@ inquireAnAnimal(animalId:number){
   this.router.navigate(['start-inquiry'],  { queryParams: { pet: `${animalId}` } });
 }
 
-initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
-  return this.http.get<UserAnimalData[]>(`${FORM_API}?userId=${userId}&animalId=${animalId}`).pipe(
-    tap(response => {
-      console.log('Response:', response);  })
-  );
-}
+// initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
+//   return this.http.get<UserAnimalData[]>(`${FORM_API}?userId=${userId}&animalId=${animalId}`).pipe(
+//     tap(response => {
+//       console.log('Response initiate form:', response);  })
+//   );
+// }
 
 
 adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
