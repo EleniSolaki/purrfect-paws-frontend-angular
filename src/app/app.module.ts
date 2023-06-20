@@ -29,6 +29,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -78,7 +79,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSlideToggleModule
   ],
   providers: [
     MyServiceService,

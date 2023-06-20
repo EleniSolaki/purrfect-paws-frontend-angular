@@ -20,12 +20,13 @@ animalId: number | undefined;
 userId: number | undefined;
 
 comments = new FormControl('', Validators.required);
+otherpets= new FormControl(false);
 maxCharacters = 530;
 
 
 constructor(private service: PrivateService, private appService: MyServiceService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   this.form = this.fb.group({
-    otherpets: [],
+    otherpets: this.otherpets,
     comments: this.comments 
   });
 }

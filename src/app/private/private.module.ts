@@ -9,6 +9,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -23,7 +24,8 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatMenuModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSlideToggleModule
    // FavoritesComponent,
     //RouterModule.forChild(routes)
   ],
