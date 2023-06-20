@@ -10,7 +10,7 @@
             </strong>
         </span>
 
-      <span *ngIf="!(isLoggedIn$ | async); else username" class="text-white">Furrfect Paws</span>
+      <span *ngIf="!(isLoggedIn$ | async); else username" class="text-white"></span>
         <ng-template #username>
         <span class="text-white">{{loggedInUsername$ | async}}</span>
         <!-- <button class="ms-2 btn btn-danger btn-sm" (click)="onlogout()">Logout</button> -->

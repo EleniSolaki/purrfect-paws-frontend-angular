@@ -30,6 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WelcomeComponent } from './public/welcome/welcome.component';
 
 
 
@@ -58,7 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FavoritesComponent,
     PageNotFoundComponent,
     StartInquiryComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     FormsModule,

@@ -72,3 +72,8 @@ export interface ClaimInterestRequest {
     comments: string;
     otherPetsAtHome: boolean;
 }
+
+export interface SlideInterface {
+    url: string;
+    title: string;
+}

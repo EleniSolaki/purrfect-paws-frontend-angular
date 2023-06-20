@@ -10,6 +10,7 @@ import { tap } from 'rxjs';
 import { HomeComponent } from '../private/home/home.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
+import { ImageSliderComponent } from './image-slider/image-slider.component';
 
 
 
@@ -36,13 +37,14 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     RegisterComponent,
     WelcomeComponent,
+    ImageSliderComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatIconModule
+    MatIconModule   
    // RouterModule.forChild(routes)
   ],
   providers: [
