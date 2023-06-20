@@ -10,10 +10,11 @@
             </strong>
         </span>
 
-      <span *ngIf="!(isLoggedIn$ | async); else username"> Animal Adoption App</span>
+      <span *ngIf="!(isLoggedIn$ | async); else username" class="text-white">Furrfect Paws</span>
         <ng-template #username>
-        <span>{{loggedInUsername$ | async}}</span>
-        <button class="ms-2 btn btn-danger btn-sm" (click)="onlogout()">Logout</button>
+        <span class="text-white">{{loggedInUsername$ | async}}</span>
+        <!-- <button class="ms-2 btn btn-danger btn-sm" (click)="onlogout()">Logout</button> -->
+        <button mat-button color="warn" (click)="onlogout()">Logout</button>
         </ng-template>
 
         <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">

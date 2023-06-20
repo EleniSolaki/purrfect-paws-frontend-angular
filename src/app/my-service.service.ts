@@ -10,7 +10,6 @@ import { LoginMessage } from 'shared';
 const LOGIN_API = "http://localhost:8080/api/user/login"
 const REGISTER_API = "http://localhost:8080/api/user/save"
 
-const USER_API = "http://localhost:8080/api/user"
 
 @Injectable({
   providedIn: 'root'
@@ -69,11 +68,14 @@ login(loginDTO: LoginDTO): void {
               text: 'Nice to see you again!',
             });
             console.log(response);
+            this.loggedInUsernameSubject.next(`${response.userUsername}`);
+            console.log("username::",this.loggedInUsernameSubject)
             this.currentUser = {
             id: response.userid,  
             username: response.userUsername,
             email: response.userEmail,
-    };
+            
+          };
     console.log("current user:",this.currentUser);
             this.router.navigate(['/home']);
             this.setIsLoading(false);
