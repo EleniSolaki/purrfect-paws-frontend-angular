@@ -1,12 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import {
-  interval,
-  Observable,
-  startWith,
-  Subject,
-  switchMap,
-  timer,
-} from 'rxjs';
 import { SlideInterface } from 'shared';
 
 @Component({
@@ -35,9 +27,7 @@ export class ImageSliderComponent implements OnInit, OnDestroy {
 
   goToPrevious(): void {
     const isFirstSlide = this.currentIndex === 0;
-    const newIndex = isFirstSlide
-      ? this.slides.length - 1
-      : this.currentIndex - 1;
+    const newIndex = isFirstSlide ? this.slides.length - 1 : this.currentIndex - 1;
 
     this.resetTimer();
     this.currentIndex = newIndex;
