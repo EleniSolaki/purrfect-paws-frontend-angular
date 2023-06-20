@@ -23,6 +23,8 @@ comments = new FormControl('', Validators.required);
 otherpets= new FormControl(false);
 maxCharacters = 530;
 
+loggedInEmail$ = this.appService.loggedInEmail$
+isLoggedIn$ = this.appService.isLoggedIn$
 
 constructor(private service: PrivateService, private appService: MyServiceService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   this.form = this.fb.group({

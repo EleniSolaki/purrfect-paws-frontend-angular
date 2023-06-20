@@ -27,6 +27,9 @@ export class MyServiceService {
   private loggedInUsernameSubject = new BehaviorSubject<string>('');
   loggedInUsername$ = this.loggedInUsernameSubject.asObservable()
 
+  private loggedInEmailSubject = new BehaviorSubject<string>('');
+  loggedInEmail$ = this.loggedInEmailSubject.asObservable()
+
   constructor(
     private http: HttpClient,
     private alertService: UiService,
@@ -69,7 +72,8 @@ login(loginDTO: LoginDTO): void {
             });
             console.log(response);
             this.loggedInUsernameSubject.next(`${response.userUsername}`);
-            console.log("username::",this.loggedInUsernameSubject)
+            this.loggedInEmailSubject.next(`${response.userEmail}`);
+            console.log("email::",this.loggedInEmailSubject)
             this.currentUser = {
             id: response.userid,  
             username: response.userUsername,
