@@ -9,7 +9,7 @@ import { MyServiceService } from './my-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Animal Adoption Logo';
+  // title = 'Animal Adoption Logo';
   menu = menu;
   linkedinLink = 'https://www.linkedin.com/in/eleni-solaki/'
   githubLink= 'https://github.com/EleniSolaki';

@@ -4,6 +4,11 @@
   min-height: 100vh;
 }
 
+.logo-image {
+  width: 80px; 
+  height: auto; 
+}
+
 .main-container {
   flex: 1;
   display: flex;
