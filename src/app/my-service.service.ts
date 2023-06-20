@@ -64,7 +64,7 @@ login(loginDTO: LoginDTO): void {
             this.loggedInSubject.next(true);
             this.alertService.newAlert({
               type: 'success',
-              heading: `Welcome ${loginDTO.email}`,
+              heading: `Welcome ${response.userUsername}`,
               text: 'Nice to see you again!',
             });
             console.log(response);
