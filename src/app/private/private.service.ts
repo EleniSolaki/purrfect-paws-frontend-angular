@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, delay, map, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, catchError, delay, map, tap, throwError } from 'rxjs';
 import { Animal, ClaimInterestRequest, FavoriteAnimal, UserAnimalData, UserDTO } from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
@@ -14,7 +14,6 @@ const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animalbreed'
 const FORM_API = "http://localhost:8080/api/claim-interest" 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +22,7 @@ export class PrivateService {
 
   constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router) { }
 
-  private selectedAnimalSubject = new BehaviorSubject<string>('');
-  selectedAnimal$ = this.selectedAnimalSubject.asObservable()
+
 
 
 getAllAnimals(): Observable<Animal[]> {
@@ -125,6 +123,34 @@ inquireAnAnimal(animalId:number){
   this.router.navigate(['start-inquiry'],  { queryParams: { pet: `${animalId}` } });
 }
 
+
+
+getAnimalNameById(id: number): Observable<{ name: string }> {
+  return this.http.get<{ name: string }>(`${ANIMAL_API}/${id}/name`)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Unknown error occurred';
+        if (error.error instanceof ErrorEvent) {
+          // Client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // Server-side error
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+
+
+
+
+
+
+
+
+
 // initiateForm(userId: number, animalId: number): Observable<UserAnimalData[]>{
 //   return this.http.get<UserAnimalData[]>(`${FORM_API}?userId=${userId}&animalId=${animalId}`).pipe(
 //     tap(response => {
@@ -155,6 +181,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
 
 
 }
+
 
 
 

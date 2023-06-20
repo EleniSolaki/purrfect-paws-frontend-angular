@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PrivateService } from '../private.service';
 import { MyServiceService } from 'src/app/my-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, switchMap, throwError } from 'rxjs';
 import { ClaimInterestRequest} from 'shared';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,6 +18,7 @@ export class StartInquiryComponent implements OnInit {
 form: FormGroup;
 animalId: number | undefined;
 userId: number | undefined;
+animalName: string | undefined;
 
 comments = new FormControl('', Validators.required);
 otherpets= new FormControl(false);
@@ -25,6 +26,10 @@ maxCharacters = 530;
 
 loggedInEmail$ = this.appService.loggedInEmail$
 isLoggedIn$ = this.appService.isLoggedIn$
+
+
+  private selectedAnimalSubject = new BehaviorSubject<string>('');
+  selectedAnimal$ = this.selectedAnimalSubject.asObservable()
 
 constructor(private service: PrivateService, private appService: MyServiceService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   this.form = this.fb.group({
@@ -38,18 +43,57 @@ constructor(private service: PrivateService, private appService: MyServiceServic
 // userId = this.appService.getCurrentUser().id;
 // animalId: number | undefined;
 
-userEmail$!: Observable<string | undefined>;
-animalName$!: Observable<string | undefined>;
+// userEmail$!: Observable<string | undefined>;
+animalName$: Observable<string> = of('');
 
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log(params,"oninit");
-      this.animalId = +params['pet'];
-    });
-
+ngOnInit(): void {
+  this.route.queryParams.subscribe(params => {
+    console.log(params, "oninit");
+    this.animalId = +params['pet'];
     this.userId = this.appService.getCurrentUser().id;
-  }
+
+    this.animalName$ = this.retrieveAnimalName(this.animalId);
+    console.log(this.animalName$);
+  });
+}
+
+// ngOnInit(): void {
+//   this.route.queryParams.subscribe(params => {
+//     console.log(params, "oninit");
+//     this.animalId = +params['pet'];
+//     this.userId = this.appService.getCurrentUser().id;
+
+//     // this.retrieveAnimalName(this.animalId).subscribe(
+//     //   (name: string) => {
+//     //     this.animalName = name;
+//     //     console.log("nameeeee",this.animalName);
+//     //     // Update your component's data or perform any other actions
+//     //   },
+//     //   (error: any) => {
+//     //     console.error(error);
+//     //   }
+//     // );
+
+//     this.animalName$ = this.retrieveAnimalName(this.animalId);
+//     console.log(this.animalName$)
+//   });
+// }
+
+
+retrieveAnimalName(id: number): Observable<string> {
+  return this.service.getAnimalNameById(id)
+    .pipe(
+      map(response => response.name),
+      catchError((error: any) => {
+        console.error(error);
+        return throwError(error);
+      })
+    );
+}
+
+
+
 
 
 onSubmit(): void {
