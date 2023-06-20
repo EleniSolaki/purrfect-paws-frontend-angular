@@ -19,13 +19,16 @@ form: FormGroup;
 animalId: number | undefined;
 userId: number | undefined;
 
+comments = new FormControl('', Validators.required);
+maxCharacters = 530;
 
-    constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder){
-    this.form = new FormGroup({
-      otherpets: new FormControl(),
-      comments: new FormControl()
-    });
-    }
+
+constructor(private service: PrivateService, private appService: MyServiceService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
+  this.form = this.fb.group({
+    otherpets: [],
+    comments: this.comments 
+  });
+}
 
     
     
@@ -66,7 +69,20 @@ onSubmit(): void {
       }
     });
   }
+
+updateCharacterCount(): void {
+  const comments = this.comments.value || '';
+  if (comments.length > this.maxCharacters) {
+    this.comments.setValue(comments.slice(0, this.maxCharacters));
+  }
 }
+
+
+
+}
+
+
+
 
 
 // userId: number | undefined;
