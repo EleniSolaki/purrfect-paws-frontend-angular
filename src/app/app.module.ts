@@ -14,14 +14,8 @@ import { NgxPopper } from 'angular-popper';
 
 import { SharedModule } from 'shared';
 import { UiModule } from 'ui';
-import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// import { 
-// 	IgxButtonModule,
-// 	IgxIconModule,
-// 	IgxRippleModule
-//  } from "igniteui-angular";
 import { PrivateService } from './private/private.service';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './private/favorites/favorites.component';
@@ -30,27 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { StartInquiryComponent } from './private/start-inquiry/start-inquiry.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { WelcomeComponent } from './public/welcome/welcome.component';
 
-
-
-
-
-//I keep the new line
-// const routes: Routes =[
-//   // {
-//   //   path: 'favorites', loadChildren:()=> import('./users/users.module').then((m)=> m.UsersModule)
-//   // },
-//   // {
-//   //   path: 'home', loadChildren:()=> import('./products/products.module').then((m)=> m.ProductsModule)
-//   // },
-//     {
-//     path: '', loadChildren:()=> import('./public/public.module').then((m)=> m.PublicModule)
-//   },
-//   // { path: 'home', component:HomeComponent },
-//  // { path: '', component:WelcomeComponent },
-//   // { path: '**', component:PageNotFoundComponent }
-// ]
 
 @NgModule({
   declarations: [
@@ -70,11 +44,8 @@ import { WelcomeComponent } from './public/welcome/welcome.component';
     UiModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    // IgxButtonModule,
     BrowserModule,
 	  BrowserAnimationsModule,
-    // IgxIconModule,
-	  // IgxRippleModule,
     NgxPopper,
     CommonModule,
     MatButtonModule,

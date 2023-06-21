@@ -1,35 +1,57 @@
-    <form [formGroup]="form" class="mx-auto w-50 border border-secondary p-5"
-    (ngSubmit)="onSubmit()">
-<div class="form-group">
-  <div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label"><strong>Email</strong></label>
-       <p *ngIf="!(isLoggedIn$ | async); else emailPlaceholder" >Furrfect Paws email</p>
-        <ng-template #emailPlaceholder>
-      <p>{{loggedInEmail$ | async}}</p>
-        </ng-template>
+<form
+  [formGroup]="form"
+  class="mx-auto w-50 border border-secondary p-5"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="form-group">
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label"
+        ><strong>Email</strong></label
+      >
+      <p *ngIf="!(isLoggedIn$ | async); else emailPlaceholder">
+        Furrfect Paws email
+      </p>
+      <ng-template #emailPlaceholder>
+        <p>{{ loggedInEmail$ | async }}</p>
+      </ng-template>
+    </div>
+
+    <div class="form-group row">
+      <label for="animalName" class="col-sm-2 col-form-label"
+        ><strong>Animal</strong></label
+      >
+      <ng-container *ngIf="!(isLoggedIn$ | async); else animalNamePlaceholder">
+        <p>Furrfect Paws animal name</p>
+      </ng-container>
+      <ng-template #animalNamePlaceholder>
+        <p>{{ animalName$ | async }}</p>
+      </ng-template>
+    </div>
   </div>
 
-<div class="form-group row">
-  <label for="animalName" class="col-sm-2 col-form-label"><strong>Animal</strong></label>
-  <ng-container *ngIf="!(isLoggedIn$ | async); else animalNamePlaceholder">
-    <p>Furrfect Paws animal name</p>
-  </ng-container>
-  <ng-template #animalNamePlaceholder>
-    <p>{{ animalName$ | async }}</p>
-  </ng-template>
-</div>
+  <mat-slide-toggle formControlName="otherpets" id="defaultCheck1"
+    ><span style="color: black"
+      >Check it if you have other pets at home.</span
+    ></mat-slide-toggle
+  >
 
-</div>
-
-  
-<mat-slide-toggle formControlName="otherpets" id="defaultCheck1"><span style="color:black">Check it if you have other pets at home.</span></mat-slide-toggle>
-
-
-<div class="form-group mt-3">
-  <label for="message">Tell us a bit about yourself and why you want to adopt this cat.</label>
-  <textarea class="form-control" id="message" rows="6" formControlName="comments" (input)="updateCharacterCount()" required></textarea>
-  <small id="counter">{{ comments.value?.length || 0 }}/{{ maxCharacters }}</small> 
-</div>
-<button mat-button type="submit" [disabled]="!comments.valid">Send your inquiry</button>
-
+  <div class="form-group mt-3">
+    <label for="message"
+      >Tell us a bit about yourself and why you want to adopt this cat.</label
+    >
+    <textarea
+      class="form-control"
+      id="message"
+      rows="6"
+      formControlName="comments"
+      (input)="updateCharacterCount()"
+      required
+    ></textarea>
+    <small id="counter"
+      >{{ comments.value?.length || 0 }}/{{ maxCharacters }}</small
+    >
+  </div>
+  <button mat-button type="submit" [disabled]="!comments.valid">
+    Send your inquiry
+  </button>
 </form>

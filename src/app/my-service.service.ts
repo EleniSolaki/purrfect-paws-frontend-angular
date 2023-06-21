@@ -52,9 +52,6 @@ export class MyServiceService {
     });
   }
 
-
-
-
 login(loginDTO: LoginDTO): void {
   this.setIsLoading(true);
   this.http.post<any>(`${LOGIN_API}`, loginDTO)

@@ -1,88 +1,102 @@
 <div class="body-container">
-<div class="container main-container mt-4">
+  <div class="container main-container mt-4">
     <div class="row">
-    <nav class="p-2 navbar navbar-expand navbar-light justify-content-between" style="background-color: #333; border-radius: 10px; height: 70px;">
+      <nav
+        class="p-2 navbar navbar-expand navbar-light justify-content-between"
+        style="background-color: #333; border-radius: 10px; height: 70px"
+      >
         <span class="navbar-brand">
-        <strong>
+          <strong>
             <a href="#" routerLink="" class="text-decoration-none text-black">
-            <img src="assets/images/logo.svg" alt="Purrfect Paws Logo" class="logo-image">
+              <img
+                src="assets/images/logo.svg"
+                alt="Purrfect Paws Logo"
+                class="logo-image"
+              />
             </a>
-            </strong>
+          </strong>
         </span>
 
-      <span *ngIf="!(isLoggedIn$ | async); else username" class="text-white"></span>
+        <span
+          *ngIf="!(isLoggedIn$ | async); else username"
+          class="text-white"
+        ></span>
         <ng-template #username>
-        <span class="text-white">{{loggedInUsername$ | async}}</span>
-        <!-- <button class="ms-2 btn btn-danger btn-sm" (click)="onlogout()">Logout</button> -->
-        <button mat-button color="warn" (click)="onlogout()">Logout</button>
+          <span class="text-white">{{ loggedInUsername$ | async }}</span>
+          <button mat-button color="warn" (click)="onlogout()">Logout</button>
         </ng-template>
 
         <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
-            <lib-dropdown
-            [dropdownLabel]="'Menu'"
-            [items]="menu">
-            </lib-dropdown>
+          <lib-dropdown [dropdownLabel]="'Menu'" [items]="menu"> </lib-dropdown>
         </ul>
 
         <ng-template #loggedOut>
-        <div class="d-flex align-items-center">
-            <button mat-button color="primary" routerLink="/login">Login</button>
-            <button mat-button color="accent" routerLink="/register">Sign up</button>
-        </div>
+          <div class="d-flex align-items-center">
+            <button mat-button color="primary" routerLink="/login">
+              Login
+            </button>
+            <button mat-button color="accent" routerLink="/register">
+              Sign up
+            </button>
+          </div>
         </ng-template>
-
-
-
-        
-    </nav>
+      </nav>
     </div>
-
-
-  
-
-
-
 
     <div class="row mt-2">
-    <div class="alert-container">
-    <lib-alert
-      *ngIf="isLoading$ | async"
-        [type]="'info'"
-        [text]="'Loading..'"
-        [spinner]="true">
-    </lib-alert>
+      <div class="alert-container">
+        <lib-alert
+          *ngIf="isLoading$ | async"
+          [type]="'info'"
+          [text]="'Loading..'"
+          [spinner]="true"
+        >
+        </lib-alert>
 
-    <lib-alert
-    *ngFor="let alert of alerts; index as i"
-    [type]="alert.type ?? 'info'"
-    [heading]="alert.heading"
-    [text]="alert.text"
-    (dismiss)="onAlertDismiss(i)">
-    </lib-alert>
-    </div>
+        <lib-alert
+          *ngFor="let alert of alerts; index as i"
+          [type]="alert.type ?? 'info'"
+          [heading]="alert.heading"
+          [text]="alert.text"
+          (dismiss)="onAlertDismiss(i)"
+        >
+        </lib-alert>
+      </div>
       <div class="content-container">
         <router-outlet></router-outlet>
       </div>
     </div>
-</div>
+  </div>
   <footer class="footer">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <h4>Contact us</h4>
-          <div><a href = "mailto: purrfect@paws.com" class="text-decoration-none text-white fs-6 ">Email</a></div>
-          <div><a href="tel:123-456-7890" class="text-decoration-none text-white fs-6">Call</a></div>
+          <div>
+            <a
+              href="mailto: purrfect@paws.com"
+              class="text-decoration-none text-white fs-6"
+              >Email</a
+            >
+          </div>
+          <div>
+            <a
+              href="tel:123-456-7890"
+              class="text-decoration-none text-white fs-6"
+              >Call</a
+            >
+          </div>
         </div>
         <div class="col-md-6">
           <h4>Follow Us</h4>
           <div class="social-icons">
-          <a [href]="linkedinLink" class="linkedin-icon" target="_blank"> 
-          <img src="assets/images/linkedin.svg" class="social-svg">
-        </a>
-        <a [href]="githubLink" class="github-icon" target="_blank">
-          <img src="assets/images/github.svg" class="social-svg">
-        </a>
-        </div>
+            <a [href]="linkedinLink" class="linkedin-icon" target="_blank">
+              <img src="assets/images/linkedin.svg" class="social-svg" />
+            </a>
+            <a [href]="githubLink" class="github-icon" target="_blank">
+              <img src="assets/images/github.svg" class="social-svg" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

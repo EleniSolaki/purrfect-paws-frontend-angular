@@ -3,7 +3,6 @@ import{ Subscription } from 'rxjs'
 import { MyServiceService } from 'src/app/my-service.service';
 import { PrivateService } from '../private.service';
 import { Animal } from 'shared';
-import { Router } from '@angular/router';
 import {orderBy} from 'lodash-es'
 
 
@@ -121,8 +120,7 @@ handleBreedSelection(breed: string) {
   });
 }
 
-
-  ngOnDestroy(): void {
+ngOnDestroy(): void {
   this.subscription?.unsubscribe();
 }
 

@@ -24,8 +24,6 @@ constructor(private formBuilder: FormBuilder, private service: MyServiceService)
   })
 }
 
-
-
 save() {
     const registerDTO: RegisterDTO = {
       firstname: this.form.get('firstname')!.value,

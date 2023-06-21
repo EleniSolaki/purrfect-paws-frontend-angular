@@ -16,6 +16,4 @@ export class WelcomeComponent {
     { url: 'https://source.unsplash.com/0przFioBl74/800x500', title: 'cat5' },
   ];
   
-
-
 }

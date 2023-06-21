@@ -89,7 +89,6 @@ getAllFavoriteAnimals(): Observable<Animal[]> {
     const userId = this.appService.getCurrentUser()?.id;
     if (!userId) {
       return throwError(() => new Error('User is not available.')) as Observable<Animal[]>;
-
     }
 
     return this.http.get<Animal[]>(`${FAVORITES_API}/${userId}`).pipe(
@@ -118,10 +117,6 @@ deleteFromFavorites(userId:number, animalId:number){
 }
 
 
-
-
-
-
 inquireAnAnimal(animalId:number){
   this.router.navigate(['start-inquiry'],  { queryParams: { pet: `${animalId}` } });
 }
@@ -133,10 +128,8 @@ getAnimalNameById(id: number): Observable<{ name: string }> {
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Unknown error occurred';
         if (error.error instanceof ErrorEvent) {
-          // Client-side error
           errorMessage = `Error: ${error.error.message}`;
         } else {
-          // Server-side error
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         console.error(errorMessage);

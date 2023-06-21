@@ -1,105 +1,163 @@
-<div >
-    <table class="table table-striped position-relative">
-        <thead>
-            <th scope="col">
-              <span>Sort by:</span>
-              <button mat-button (click)="toggleSort('age')" class="m-1 sorting-color">Age</button>
-              <button mat-button (click)="toggleSort('breed')" class="m-1 sorting-color">Breed</button>
-          
-<div class="float-end position-absolute top-0 end-0">
-  <div class="btn-group me-1">
-    <button mat-button (click)="ngOnInit()" >
-      <span class="sr-only">Get All</span>
-    </button>
-  </div>
-  <div class="btn-group me-1">
-    <button mat-button [matMenuTriggerFor]="genderMenu" aria-haspopup="true" aria-expanded="false">
-      <span class="sr-only">Gender</span>
-    </button>
-    <mat-menu #genderMenu="matMenu">
-      <button mat-menu-item (click)="handleGenderSelection('Male')">Male</button>
-      <button mat-menu-item (click)="handleGenderSelection('Female')">Female</button>
-    </mat-menu>
-  </div>
-  <div class="btn-group me-1">
-    <button mat-button [matMenuTriggerFor]="ageMenu" aria-haspopup="true" aria-expanded="false">
-      <span class="sr-only">Age</span>
-    </button>
-    <mat-menu #ageMenu="matMenu">
-      <button mat-menu-item (click)="handleAgeSelection('1 years old')">1 years</button>
-      <button mat-menu-item (click)="handleAgeSelection('2 years old')">2 years</button>
-      <button mat-menu-item (click)="handleAgeSelection('3 years old')">3 years</button>
-      <button mat-menu-item (click)="handleAgeSelection('7 years old')">7 years</button>
-      <button mat-menu-item (click)="handleAgeSelection('9 years old')">9 years</button>
-      <button mat-menu-item (click)="handleAgeSelection('13 years old')">13 years</button>
-    </mat-menu>
-  </div>
-  <div class="btn-group me-1">
-    <button mat-button [matMenuTriggerFor]="breedMenu" aria-haspopup="true" aria-expanded="false">
-      <span class="sr-only">Breed</span>
-    </button>
-    <mat-menu #breedMenu="matMenu">
-      <button mat-menu-item (click)="handleBreedSelection('European Shorthair')">European Shorthair</button>
-      <button mat-menu-item (click)="handleBreedSelection('Halfbreed Calico')">Halfbreed Calico</button>
-      <button mat-menu-item (click)="handleBreedSelection('Aegean')">Aegean</button>
-      <button mat-menu-item (click)="handleBreedSelection('Bombay')">Bombay</button>
-      <button mat-menu-item (click)="handleBreedSelection('Swedish countryside')">Swedish countryside</button>
-    </mat-menu>
-  </div>
-</div>
+<div>
+  <table class="table table-striped position-relative">
+    <thead>
+      <th scope="col">
+        <span>Sort by:</span>
+        <button
+          mat-button
+          (click)="toggleSort('age')"
+          class="m-1 sorting-color"
+        >
+          Age
+        </button>
+        <button
+          mat-button
+          (click)="toggleSort('breed')"
+          class="m-1 sorting-color"
+        >
+          Breed
+        </button>
 
+        <div class="float-end position-absolute top-0 end-0">
+          <div class="btn-group me-1">
+            <button mat-button (click)="ngOnInit()">
+              <span class="sr-only">Get All</span>
+            </button>
+          </div>
+          <div class="btn-group me-1">
+            <button
+              mat-button
+              [matMenuTriggerFor]="genderMenu"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Gender</span>
+            </button>
+            <mat-menu #genderMenu="matMenu">
+              <button mat-menu-item (click)="handleGenderSelection('Male')">
+                Male
+              </button>
+              <button mat-menu-item (click)="handleGenderSelection('Female')">
+                Female
+              </button>
+            </mat-menu>
+          </div>
+          <div class="btn-group me-1">
+            <button
+              mat-button
+              [matMenuTriggerFor]="ageMenu"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Age</span>
+            </button>
+            <mat-menu #ageMenu="matMenu">
+              <button mat-menu-item (click)="handleAgeSelection('1 years old')">
+                1 years
+              </button>
+              <button mat-menu-item (click)="handleAgeSelection('2 years old')">
+                2 years
+              </button>
+              <button mat-menu-item (click)="handleAgeSelection('3 years old')">
+                3 years
+              </button>
+              <button mat-menu-item (click)="handleAgeSelection('7 years old')">
+                7 years
+              </button>
+              <button mat-menu-item (click)="handleAgeSelection('9 years old')">
+                9 years
+              </button>
+              <button
+                mat-menu-item
+                (click)="handleAgeSelection('13 years old')"
+              >
+                13 years
+              </button>
+            </mat-menu>
+          </div>
+          <div class="btn-group me-1">
+            <button
+              mat-button
+              [matMenuTriggerFor]="breedMenu"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Breed</span>
+            </button>
+            <mat-menu #breedMenu="matMenu">
+              <button
+                mat-menu-item
+                (click)="handleBreedSelection('European Shorthair')"
+              >
+                European Shorthair
+              </button>
+              <button
+                mat-menu-item
+                (click)="handleBreedSelection('Halfbreed Calico')"
+              >
+                Halfbreed Calico
+              </button>
+              <button mat-menu-item (click)="handleBreedSelection('Aegean')">
+                Aegean
+              </button>
+              <button mat-menu-item (click)="handleBreedSelection('Bombay')">
+                Bombay
+              </button>
+              <button
+                mat-menu-item
+                (click)="handleBreedSelection('Swedish countryside')"
+              >
+                Swedish countryside
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </th>
+    </thead>
 
-
-
-
-
-
-
-
-
-
-
-
-
-  </th>
-
-        </thead>
-
-
-
-
-
-
-
-
-
-
-        <tbody>
-
-
-
-<div class="row">
-<!-- <div class="card-group"> -->
-  <div *ngFor="let animal of animals" class="col-sm-3 mb-4">
-    <div class="card h-100  d-flex flex-column text-center">
-      <img class="card-img-top" [src]="animal.image" alt="Cat image" style="width:100%; height: 200px; object-fit: cover; margin:auto; border-radius: 5px; ">
-      <div class="card-body">
-        <h2 class="card-title" >{{ animal.name }}</h2>
-        <p class="card-text" style="height:40px">{{ animal.description }}</p>
+    <tbody>
+      <div class="row">
+        <div *ngFor="let animal of animals" class="col-sm-3 mb-4">
+          <div class="card h-100 d-flex flex-column text-center">
+            <img
+              class="card-img-top"
+              [src]="animal.image"
+              alt="Cat image"
+              style="
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                margin: auto;
+                border-radius: 5px;
+              "
+            />
+            <div class="card-body">
+              <h2 class="card-title">{{ animal.name }}</h2>
+              <p class="card-text" style="height: 40px">
+                {{ animal.description }}
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Breed: {{ animal.breed }}</li>
+              <li class="list-group-item">Age: {{ animal.age }}</li>
+              <li class="list-group-item">Gender: {{ animal.gender }}</li>
+            </ul>
+            <div
+              class="card-body d-flex justify-content-center align-items-center"
+            >
+              <button
+                mat-fab
+                extended
+                color="primary"
+                (click)="addToFavorites(animal.id)"
+                aria-label="add to favorites"
+              >
+                Add to favorites<mat-icon>favorite</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <ul class="list-group list-group-flush ">
-        <li class="list-group-item">Breed: {{ animal.breed }}</li>
-        <li class="list-group-item">Age: {{ animal.age }}</li>
-        <li class="list-group-item">Gender: {{ animal.gender }}</li>
-      </ul>
-      <div class="card-body d-flex justify-content-center align-items-center">
-      <button mat-fab extended color="primary" (click)="addToFavorites(animal.id)" aria-label="add to favorites">Add to favorites<mat-icon >favorite</mat-icon></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-        </tbody>
-    </table>
+    </tbody>
+  </table>
 </div>
