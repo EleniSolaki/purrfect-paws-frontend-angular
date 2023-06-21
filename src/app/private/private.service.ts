@@ -146,6 +146,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
         type: 'success',
         text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
       });
+      this.router.navigate(['favorites']);
     }),
     catchError((error) => {
       console.error(error, 'error in inquiry');

@@ -43,10 +43,8 @@ animalName$: Observable<string> = of('');
 
 ngOnInit(): void {
   this.route.queryParams.subscribe(params => {
-    console.log(params, "oninit");
     this.animalId = +params['pet'];
     this.userId = this.appService.getCurrentUser().id;
-
     this.animalName$ = this.retrieveAnimalName(this.animalId);
   });
 }
@@ -77,6 +75,7 @@ onSubmit(): void {
     this.service.adoptionInquiry(claimInterestRequest).subscribe({
       next: () => {
         console.log("success in inquiry");
+        this.form.reset();
       },
       error: error => {
         console.error(error,"error in inquiry");

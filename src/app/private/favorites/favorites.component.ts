@@ -25,7 +25,6 @@ ngOnInit(): void {
 }
 
 getData(): void {
-    console.log('Starting "findAllFavoriteAnimals" API call');
   this.appService.setIsLoading(true);
   this.subscription = this.service.getAllFavoriteAnimals().subscribe({
   next: (response: any) => {

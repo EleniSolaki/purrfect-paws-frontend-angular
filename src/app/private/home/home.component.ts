@@ -104,7 +104,6 @@ handleAgeSelection(age: string) {
 }
 
 handleBreedSelection(breed: string) {
-  console.log('Selected breed:', breed);
   this.appService.setIsLoading(true); 
 
   this.subscription = this.service.getByBreed(breed).subscribe({

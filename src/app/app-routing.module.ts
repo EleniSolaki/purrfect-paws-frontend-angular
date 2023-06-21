@@ -17,7 +17,6 @@ const userGuard = () => {
   const service = inject(MyServiceService);
   return service.isLoggedIn$.pipe(
     tap((isLoggedIn) => {
-      console.log(isLoggedIn)
       if (!isLoggedIn) router.navigate(['/login']);
     })
   );
