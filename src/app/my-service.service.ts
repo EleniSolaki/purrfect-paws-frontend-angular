@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, switchMap, tap, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
 import { LoginDTO, RegisterDTO, UserDTO } from 'shared';
@@ -47,7 +47,7 @@ export class MyServiceService {
 
   save(registerDTO: RegisterDTO) {
     this.http.post(`${REGISTER_API}`, registerDTO, { responseType: 'text' }).subscribe((resultData: any) => {
-      alert("User Registered Successfully");
+      alert("You have signed up successfully, we will redirect you to login");
       this.router.navigate(['/login']);
     });
   }
@@ -61,26 +61,21 @@ login(loginDTO: LoginDTO): void {
       .subscribe({
         next: (response) => {
           const loginMessage: LoginMessage = response;
-
           if (loginMessage.status) {
-
             this.loggedInSubject.next(true);
             this.alertService.newAlert({
               type: 'success',
               heading: `Welcome ${response.userUsername}`,
-              text: 'Nice to see you again!',
+              text: 'Nice to see you!',
             });
-            console.log(response);
             this.loggedInUsernameSubject.next(`${response.userUsername}`);
             this.loggedInEmailSubject.next(`${response.userEmail}`);
-            console.log("email::",this.loggedInEmailSubject)
             this.currentUser = {
             id: response.userid,  
             username: response.userUsername,
             email: response.userEmail,
             
           };
-    console.log("current user:",this.currentUser);
             this.router.navigate(['/home']);
             this.setIsLoading(false);
           } else {
@@ -90,9 +85,7 @@ login(loginDTO: LoginDTO): void {
               text: 'An error occurred during login',
             });
           }
-
           this.setIsLoading(false);
-          
         },
         error: (error) => {
           this.alertService.newAlert({
@@ -100,7 +93,6 @@ login(loginDTO: LoginDTO): void {
             heading: 'Authentication Error',
             text: 'An error occurred during login.',
           });
-
           this.setIsLoading(false);
         }
       });
@@ -116,4 +108,3 @@ login(loginDTO: LoginDTO): void {
     this.isLoadingSubject.next(isLoading);
   }
 }
-      

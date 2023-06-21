@@ -23,7 +23,7 @@ enum AgeEnum {
 })
 export class HomeComponent implements OnInit, OnDestroy{
 
-constructor(private service: PrivateService,  private appService: MyServiceService, private router: Router, ){}
+constructor(private service: PrivateService,  private appService: MyServiceService){}
 
 animals : Animal[] = [];
 subscription: Subscription | undefined
@@ -38,12 +38,10 @@ ngOnInit(): void {
 }
 
 getData(): void {
-    console.log('Starting "findAllAnimals" API call');
   this.appService.setIsLoading(true);
   this.subscription = this.service.getAllAnimals().subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
-      console.log(this.animals);
     },
     error: (error) => {
       this.appService.setIsLoading(false);
@@ -51,21 +49,16 @@ getData(): void {
     },
     complete: () => {
       this.appService.setIsLoading(false);
-      console.log("API call completed");
     }
   });
 }
 
-
 addToFavorites(animal:number): void {
     const userId = this.appService.getCurrentUser().id; 
-
-    console.log("component, userid, animalid",userId, animal);
 
     this.service.saveFavoriteAnimal(animal, userId).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
-      console.log("animals component",this.animals);
     },
     error: (error) => {
       this.appService.setIsLoading(false);
@@ -73,7 +66,6 @@ addToFavorites(animal:number): void {
     },
     complete: () => {
       this.appService.setIsLoading(false);
-      console.log("API call completed");
       this.getData();
     }
   });
@@ -82,19 +74,16 @@ addToFavorites(animal:number): void {
 
 handleGenderSelection(gender: string) {
   const trimmedGender = gender.trim();
-  console.log('Selected gender:', trimmedGender);
   this.appService.setIsLoading(true); 
   this.subscription = this.service.getByGender(trimmedGender).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
-      console.log(this.animals);
     },
     error: (error) => {
       console.log(error);
     },
     complete: () => {
       this.appService.setIsLoading(false); 
-      console.log("API call completed");
     }
   });
 }
@@ -105,14 +94,12 @@ handleAgeSelection(age: string) {
   this.subscription = this.service.getByAge(age).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
-      console.log(this.animals);
     },
     error: (error) => {
       console.log(error);
     },
     complete: () => {
       this.appService.setIsLoading(false); 
-      console.log("API call completed");
     }
   });
 }
@@ -124,14 +111,12 @@ handleBreedSelection(breed: string) {
   this.subscription = this.service.getByBreed(breed).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
-      console.log(this.animals);
     },
     error: (error) => {
       console.log(error);
     },
     complete: () => {
       this.appService.setIsLoading(false); 
-      console.log("API call completed");
     }
   });
 }
@@ -141,36 +126,24 @@ handleBreedSelection(breed: string) {
   this.subscription?.unsubscribe();
 }
 
-
-
-
-// toggleSort(key:string){
-//   switch (key) {
-//     case 'age':
-//       this.ageSortType = this.ageSortType === 'asc' ? 'desc' : 'asc';
-//       this.animals = orderBy(this.animals, [key], [this.ageSortType])
-//       break;
-//       case 'breed':
-//       this.breedSortType = this.breedSortType === 'asc' ? 'desc' : 'asc';
-//       this.animals = orderBy(this.animals, [key], [this.breedSortType])
-//       break;  
-//       default:
-//       break;
-//   }
-// }
-
 toggleSort(key: string) {
   switch (key) {
     case 'age':
       this.ageSortType = this.ageSortType === 'asc' ? 'desc' : 'asc';
       this.animals = orderBy(this.animals, [(animal: any) => {
         switch (animal.age) {
+          case AgeEnum.OneYearsOld:
+            return 1;
           case AgeEnum.TwoYearsOld:
             return 2;
           case AgeEnum.ThreeYearsOld:
             return 3;
+          case AgeEnum.SevenYearsOld:
+            return 7;
           case AgeEnum.NineYearsOld:
             return 9;
+          case AgeEnum.ThirteenYearsOld:
+            return 13;
           default:
             return 0;
         }
@@ -184,10 +157,6 @@ toggleSort(key: string) {
       break;
   }
 }
-
-
-
-
   
 }
 
