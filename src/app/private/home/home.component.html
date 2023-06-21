@@ -28,9 +28,12 @@
       <span class="sr-only">Age</span>
     </button>
     <mat-menu #ageMenu="matMenu">
+      <button mat-menu-item (click)="handleAgeSelection('1 years old')">1 years</button>
       <button mat-menu-item (click)="handleAgeSelection('2 years old')">2 years</button>
       <button mat-menu-item (click)="handleAgeSelection('3 years old')">3 years</button>
+      <button mat-menu-item (click)="handleAgeSelection('7 years old')">7 years</button>
       <button mat-menu-item (click)="handleAgeSelection('9 years old')">9 years</button>
+      <button mat-menu-item (click)="handleAgeSelection('13 years old')">13 years</button>
     </mat-menu>
   </div>
   <div class="btn-group me-1">
@@ -40,7 +43,9 @@
     <mat-menu #breedMenu="matMenu">
       <button mat-menu-item (click)="handleBreedSelection('European Shorthair')">European Shorthair</button>
       <button mat-menu-item (click)="handleBreedSelection('Halfbreed Calico')">Halfbreed Calico</button>
-      <button mat-menu-item (click)="handleBreedSelection('Aegean cat')">Aegean cat</button>
+      <button mat-menu-item (click)="handleBreedSelection('Aegean')">Aegean</button>
+      <button mat-menu-item (click)="handleBreedSelection('Bombay')">Bombay</button>
+      <button mat-menu-item (click)="handleBreedSelection('Swedish countryside')">Swedish countryside</button>
     </mat-menu>
   </div>
 </div>
@@ -79,7 +84,7 @@
 <!-- <div class="card-group"> -->
   <div *ngFor="let animal of animals" class="col-sm-3 mb-4">
     <div class="card h-100  d-flex flex-column text-center">
-      <img class="card-img-top" [src]="animal.image" alt="Cat image" style="object-fit: cover;">
+      <img class="card-img-top" [src]="animal.image" alt="Cat image" style="width:100%; height: 200px; object-fit: cover; margin:auto; border-radius: 5px; ">
       <div class="card-body">
         <h2 class="card-title" >{{ animal.name }}</h2>
         <p class="card-text" style="height:40px">{{ animal.description }}</p>

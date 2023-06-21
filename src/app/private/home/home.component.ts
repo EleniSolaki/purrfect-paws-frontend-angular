@@ -8,9 +8,12 @@ import {orderBy} from 'lodash-es'
 
 
 enum AgeEnum {
+  OneYearsOld = '1 years old',
   TwoYearsOld = '2 years old',
   ThreeYearsOld = '3 years old',
-  NineYearsOld = '9 years old'
+  SevenYearsOld = '7 years old',
+  NineYearsOld = '9 years old',
+  ThirteenYearsOld = '13 years old',
 }
 
 @Component({
@@ -97,11 +100,9 @@ handleGenderSelection(gender: string) {
 }
 
 handleAgeSelection(age: string) {
-  const trimmedAge = age.trim();
-  console.log('Selected age:', trimmedAge);
   this.appService.setIsLoading(true); 
 
-  this.subscription = this.service.getByAge(trimmedAge).subscribe({
+  this.subscription = this.service.getByAge(age).subscribe({
     next: (animalList: Animal[]) => {
       this.animals = animalList;
       console.log(this.animals);

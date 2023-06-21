@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyServiceService } from '../../my-service.service';
-import { RegisterDTO, UserDTO } from 'shared';
+import { RegisterDTO } from 'shared';
 
 
 @Component({

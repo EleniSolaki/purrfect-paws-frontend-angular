@@ -5,8 +5,8 @@
 }
 
 .logo-image {
-  width: 80px; 
-  height: auto; 
+  width: auto; 
+  height: 50px; 
 }
 
 .main-container {
@@ -38,6 +38,13 @@
 }
 
 
+.social-svg {
+  width:24px;
+  height:24px;
+  margin-right: 10px;
+}
+
+
 .footer {
   width: 100%;
   padding: 10px 0;
@@ -45,3 +52,4 @@
   color: #fff;
   text-align: center;
 }
+

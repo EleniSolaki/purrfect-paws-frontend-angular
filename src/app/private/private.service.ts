@@ -6,11 +6,11 @@ import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
 
-const ANIMAL_API = 'http://localhost:8080/api'
+const ANIMAL_API = 'http://localhost:8080/api/animal'
 const FAVORITES_API = 'http://localhost:8080/api/favorite-animals'
-const ANIMALS_GENDER_API = 'http://localhost:8080/api/animalsgender'
-const ANIMAS_BY_AGE_API = 'http://localhost:8080/api/animalage'
-const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animalbreed'
+const ANIMALS_GENDER_API = 'http://localhost:8080/api/animal/animalsgender'
+const ANIMAS_BY_AGE_API = 'http://localhost:8080/api/animal/animalage'
+const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animal/animalbreed'
 const FORM_API = "http://localhost:8080/api/claim-interest" 
 
 

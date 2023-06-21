@@ -6,7 +6,7 @@
 <div class="row">
   <div *ngFor="let favanimal of favoriteAnimals" class="col-sm-3 mb-4">
     <div class="card h-100 d-flex flex-column text-center">
-      <img class="card-img-top" [src]="favanimal.image" alt="Cat image" style="max-height: 210px; max-width:303px">
+      <img class="card-img-top" [src]="favanimal.image" alt="Cat image" style="width:100%; height: 200px; object-fit: cover; margin:auto; border-radius: 5px; ">>
       <div class="card-body">
         <h2 class="card-title">{{ favanimal.name }}</h2>
         <p class="card-text" style="height:40px">{{ favanimal.description }}</p>
