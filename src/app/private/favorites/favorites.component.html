@@ -16,13 +16,11 @@
         <li class="list-group-item">Age: {{ favanimal.age }}</li>
         <li class="list-group-item">Gender: {{ favanimal.gender }}</li>
       </ul>
-      <div class="card-body d-flex justify-content-center align-items-center">
+      <div class="card-body d-flex justify-content-around align-items-center">
         <button mat-mini-fab color="primary" (click)="deleteFromFavorites(favanimal.id)" >
           <mat-icon>delete</mat-icon>
         </button>
-        <button class="btn" (click)="inquireTheAnimal(favanimal.id)" >
-          Start your inquiry
-        </button>
+        <button mat-flat-button (click)="inquireTheAnimal(favanimal.id)">Start your inquiry</button>
       </div>
     </div>
   </div>
