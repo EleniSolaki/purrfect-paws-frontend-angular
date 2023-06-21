@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { PrivateService } from '../private.service';
 import { MyServiceService } from '../../my-service.service';
 import { Animal } from 'shared';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UiService } from 'ui';
 
 
 
@@ -14,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor(private service: PrivateService,  private appService: MyServiceService){}
+  constructor(private service: PrivateService,  private appService: MyServiceService, private alertService: UiService){}
 
   favoriteAnimals : Animal[] = [];;
   subscription: Subscription | undefined
@@ -57,7 +58,24 @@ deleteFromFavorites(animalId: number): void {
 }
 
 
-inquireTheAnimal(animalId:number){
-this.service.inquireAnAnimal(animalId)
+
+async inquireTheAnimal(animalId: number) {
+  const userId = this.appService.getCurrentUser().id;
+
+  try {
+    const claimInterestExists = await this.service.checkClaimInterestExists(userId, animalId);
+    if (claimInterestExists) {
+      console.log('Inquiry already exists');
+        this.alertService.newAlert({
+        type: 'danger',
+        text: 'You have already claimed interest for this cat.',
+        autoDismiss: true,
+      });
+    } else {
+      this.service.inquireAnAnimal(animalId);
+    }
+  } catch (error) {
+    console.error('Error checking inquiry existence:', error);
+  }
 }
 }

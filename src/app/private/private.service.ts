@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, delay, firstValueFrom, map, tap, throwError } from 'rxjs';
 import { Animal, ClaimInterestRequest} from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
@@ -63,6 +63,7 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
         this.alertService.newAlert({
           type: 'success',
           text: 'Cat saved successfully',
+          autoDismiss: true,
         });
         return response.data;
       }),
@@ -71,6 +72,7 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
           this.alertService.newAlert({
             type: 'warning',
             text: 'This cat is already saved',
+            autoDismiss: true,
           });
         }
         return throwError(() => error);
@@ -80,6 +82,7 @@ saveFavoriteAnimal(animalId: number, userId: number): Observable<any> {
     this.alertService.newAlert({
       type: 'danger',
       text: 'You must be logged in to save favorite animals.',
+      autoDismiss: true,
     });
     return throwError(() => new Error('Error saving favorite animals. Please try again.')) as Observable<any>;
   }
@@ -107,6 +110,7 @@ deleteFromFavorites(userId:number, animalId:number){
       this.alertService.newAlert({
         type: 'success',
         text: 'It was deleted successfully.',
+        autoDismiss: true,
       });
     }),
     catchError((error) => {
@@ -139,20 +143,62 @@ getAnimalNameById(id: number): Observable<{ name: string }> {
 }
 
 
+checkClaimInterestExists(userId: number, animalId: number): Promise<boolean | undefined> {
+  return firstValueFrom(
+    this.http
+      .get<boolean>(`${FORM_API}/exists`, { params: { userId: userId.toString(), animalId: animalId.toString() } })
+  ).catch((error) => {
+    console.error('Error checking inquiry existence:', error);
+    return undefined;
+  });
+}
+async inquiryExists(userId: number, animalId: number): Promise<boolean> {
+  try {
+    const claimInterestExists = await this.checkClaimInterestExists(userId, animalId);
+    if (claimInterestExists) {
+      this.alertService.newAlert({
+        type: 'danger',
+        text: 'You have already claimed interest for this cat.',
+        autoDismiss: true,
+      });
+    }
+    return claimInterestExists ?? false;
+  } catch (error) {
+    console.error('Error checking inquiry existence:', error);
+    return false; 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
   return this.http.post<void>(`${FORM_API}`, claimInterest).pipe(
     tap(() => {
       this.alertService.newAlert({
         type: 'success',
         text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
+        autoDismiss: false,
       });
       this.router.navigate(['favorites']);
     }),
     catchError((error) => {
-      console.error(error, 'error in inquiry');
       this.alertService.newAlert({
         type: 'danger',
-        text: 'Error submitting your claim of interest. Please try again.',
+        text: 'Error submitting your claim of interest. Inquiry for this cat already submited.',
+        autoDismiss: true,
       });
       return throwError(() => error);
     })

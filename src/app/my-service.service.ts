@@ -64,6 +64,7 @@ login(loginDTO: LoginDTO): void {
               type: 'success',
               heading: `Welcome ${response.userUsername}`,
               text: 'Nice to see you!',
+              autoDismiss: false,
             });
             this.loggedInUsernameSubject.next(`${response.userUsername}`);
             this.loggedInEmailSubject.next(`${response.userEmail}`);
@@ -80,6 +81,7 @@ login(loginDTO: LoginDTO): void {
               type: 'danger',
               heading: 'Authentication Error',
               text: 'An error occurred during login',
+              autoDismiss: true,
             });
           }
           this.setIsLoading(false);
@@ -89,6 +91,7 @@ login(loginDTO: LoginDTO): void {
             type: 'danger',
             heading: 'Authentication Error',
             text: 'An error occurred during login.',
+            autoDismiss: true,
           });
           this.setIsLoading(false);
         }
