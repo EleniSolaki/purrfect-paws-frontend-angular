@@ -62,7 +62,7 @@ login(loginDTO: LoginDTO): void {
             this.loggedInSubject.next(true);
             this.alertService.newAlert({
               type: 'success',
-              heading: `Welcome ${response.userUsername}`,
+              heading: `Welcome ${response.userUsername}.`,
               text: 'Nice to see you!',
               autoDismiss: false,
             });
@@ -75,7 +75,6 @@ login(loginDTO: LoginDTO): void {
             
           };
             this.router.navigate(['/home']);
-            this.setIsLoading(false);
           } else {
             this.alertService.newAlert({
               type: 'danger',
@@ -84,7 +83,6 @@ login(loginDTO: LoginDTO): void {
               autoDismiss: true,
             });
           }
-          this.setIsLoading(false);
         },
         error: (error) => {
           this.alertService.newAlert({
@@ -93,7 +91,6 @@ login(loginDTO: LoginDTO): void {
             text: 'An error occurred during login.',
             autoDismiss: true,
           });
-          this.setIsLoading(false);
         }
       });
   }
