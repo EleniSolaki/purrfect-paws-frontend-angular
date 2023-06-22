@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
 import { LoginDTO, RegisterDTO, UserDTO } from 'shared';
@@ -45,12 +45,37 @@ export class MyServiceService {
   }
 
 
-  save(registerDTO: RegisterDTO) {
-    this.http.post(`${REGISTER_API}`, registerDTO, { responseType: 'text' }).subscribe((resultData: any) => {
-      alert("You have signed up successfully, we will redirect you to login");
-      this.router.navigate(['/login']);
+  save(registerDTO: RegisterDTO): Observable<any> {
+    return new Observable((observer) => {
+      this.http.post(`${REGISTER_API}`, registerDTO, { responseType: 'text' })
+        .subscribe({
+          next: (resultData: any) => {
+            this.setIsLoading(true);
+              this.alertService.newAlert({
+              type: 'success',
+              heading: `You have signed up successfully!`,
+              text: 'You are being redirected to the login page.',
+              autoDismiss: true,
+            });
+            observer.next(resultData);
+            observer.complete();
+            setTimeout(() =>{
+              this.router.navigate(['/login']), this.setIsLoading(false);           
+            }, 3000);
+            
+          },
+          error: (error: any) => {
+            if (error.status === 400) {
+              alert("There is already an account with this email. Please choose a different email.");
+            } else {
+              alert("An error occurred while signing up. Please try again later.");
+            }
+            observer.error(error);
+          }
+        });
     });
   }
+
 
 login(loginDTO: LoginDTO): void {
   this.setIsLoading(true);

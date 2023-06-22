@@ -33,10 +33,15 @@ save() {
       password: this.form.get('password')!.value
     };
 
-    this.service.save(registerDTO);
-    this.form.reset();
+    this.service.save(registerDTO)
+    .subscribe({
+      next: (resultData: any) => {
+      console.log("Success in signup")
+    },
+  });
+
+  this.form.reset();
   }
-
-
+  
 }
 
