@@ -43,3 +43,39 @@
   cursor: pointer;
   font-size: 20px;
 }
+
+@media (max-width: 992px) {
+  .slider {
+    width: 700px;
+    height: auto;
+  }
+
+  .slide {
+    width: 700px;
+    height: 400px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .slider {
+    width: 500px;
+    height: auto;
+  }
+
+  .slide {
+    width: 500px;
+    height: 400px; 
+  }
+}
+
+@media (max-width: 576px) {
+  .slider {
+    width: 300px;
+    height: auto;
+  }
+
+  .slide {
+    width: 300px;
+    height: 400px; 
+  }
+}

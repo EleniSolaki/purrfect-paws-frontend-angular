@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map } from 'rxjs';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
 import { LoginDTO, RegisterDTO, UserDTO } from 'shared';
@@ -9,7 +9,7 @@ import { LoginMessage } from 'shared';
 
 const LOGIN_API = "http://localhost:8080/api/user/login"
 const REGISTER_API = "http://localhost:8080/api/user/save"
-
+const CONTACT_MAIL = "https://mailthis.to/purrfectpaws"
 
 @Injectable({
   providedIn: 'root'
@@ -128,4 +128,20 @@ login(loginDTO: LoginDTO): void {
   setIsLoading(isLoading: boolean) {
     this.isLoadingSubject.next(isLoading);
   }
+
+contactEmail(input: any) {
+  return this.http.post(`${CONTACT_MAIL}`, input, { responseType: 'text' }).pipe(
+    (map(
+      (response) => {
+        if (response) {
+          return response;
+        }
+        throw new Error('No response received.');
+      })
+    ),
+    catchError((error: any) => {
+      return error;
+    })
+  );
+}
 }
