@@ -189,7 +189,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
       this.alertService.newAlert({
         type: 'success',
         text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
-        autoDismiss: false,
+        autoDismiss: true,
       });
       //this.sendEmail()
       this.router.navigate(['favorites']);
