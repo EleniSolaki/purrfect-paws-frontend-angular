@@ -70,7 +70,6 @@ export class MyServiceService {
             } else {
               alert("An error occurred while signing up. Please try again later.");
             }
-            observer.error(error);
           }
         });
     });
@@ -89,7 +88,7 @@ login(loginDTO: LoginDTO): void {
               type: 'success',
               heading: `Welcome ${response.userUsername}.`,
               text: 'Nice to see you!',
-              autoDismiss: false,
+              autoDismiss: true,
             });
             this.loggedInUsernameSubject.next(`${response.userUsername}`);
             this.loggedInEmailSubject.next(`${response.userEmail}`);

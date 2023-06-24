@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PrivateService } from '../private.service';
 import { MyServiceService } from 'src/app/my-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, take, throwError } from 'rxjs';
 import { ClaimInterestRequest} from 'shared';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -76,6 +75,12 @@ onSubmit(): void {
       next: () => {
         console.log("success in inquiry");
         this.form.reset();
+    this.appService.loggedInEmail$.pipe(
+        take(1)
+      ).subscribe((recipient: string) => {
+        this.service.setRecipient(recipient);
+        this.service.sendEmail();
+      }).unsubscribe(); 
       },
       error: error => {
         console.error(error,"error in inquiry");

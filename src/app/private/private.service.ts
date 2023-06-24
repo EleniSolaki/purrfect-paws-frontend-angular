@@ -1,10 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, firstValueFrom, map, tap, throwError } from 'rxjs';
-import { Animal, ClaimInterestRequest} from 'shared';
+import { BehaviorSubject, Observable, Subscription, catchError, delay, firstValueFrom, map, of, tap, throwError } from 'rxjs';
+import { Animal, ClaimInterestRequest, EmailDetails} from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+
 
 const ANIMAL_API = 'http://localhost:8080/api/animal'
 const FAVORITES_API = 'http://localhost:8080/api/favorite-animals'
@@ -12,16 +14,28 @@ const ANIMALS_GENDER_API = 'http://localhost:8080/api/animal/animalsgender'
 const ANIMAS_BY_AGE_API = 'http://localhost:8080/api/animal/animalage'
 const ANIMALS_BY_BREED_API = 'http://localhost:8080/api/animal/animalbreed'
 const FORM_API = "http://localhost:8080/api/claim-interest" 
-
+const EMAIL_API = "http://localhost:8080/api/mail/sendMail"
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrivateService {
   
+private loggedInEmailSubject = new BehaviorSubject<string>('');
+  loggedInEmail$ = this.loggedInEmailSubject.asObservable();
 
-  constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router) { }
+  private recipient: string ='';
 
+  constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router, private route: ActivatedRoute) { }
+
+
+
+
+
+
+  setRecipient(recipient: string): void {
+    this.recipient = recipient;
+  }
 
 getAllAnimals(): Observable<Animal[]> {
   return this.http.get<Animal[]>(`${ANIMAL_API}/animals`).pipe(
@@ -96,7 +110,7 @@ getAllFavoriteAnimals(): Observable<Animal[]> {
 
     return this.http.get<Animal[]>(`${FAVORITES_API}/${userId}`).pipe(
       catchError((error) => {
-        console.error('Error fetching favorite animals:', error);
+       // console.error('Error fetching favorite animals:', error);
         return throwError(() => new Error('Error fetching favorite animals. Please try again.')) as Observable<Animal[]>;
       })
       );
@@ -109,13 +123,13 @@ deleteFromFavorites(userId:number, animalId:number){
     tap(() => {
       this.alertService.newAlert({
         type: 'success',
-        text: 'It was deleted successfully.',
+        text: 'The cat has been successfully deleted from favorites.',
         autoDismiss: true,
       });
     }),
     catchError((error) => {
-      console.error('Error deleting favorite animals:', error);
-      return throwError(() => new Error('Error deleting favorite animals. Please try again.'));
+      //console.error('Error deleting favorite animal:', error);
+      return throwError(() => new Error('Error deleting favorite animal. Please try again.'));
     })
   );
 }
@@ -136,7 +150,7 @@ getAnimalNameById(id: number): Observable<{ name: string }> {
         } else {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
-        console.error(errorMessage);
+       // console.error(errorMessage);
         return throwError(() => new Error(errorMessage));
       })
     );
@@ -169,21 +183,6 @@ async inquiryExists(userId: number, animalId: number): Promise<boolean> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
   return this.http.post<void>(`${FORM_API}`, claimInterest).pipe(
     tap(() => {
@@ -192,6 +191,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
         text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
         autoDismiss: false,
       });
+      //this.sendEmail()
       this.router.navigate(['favorites']);
     }),
     catchError((error) => {
@@ -204,6 +204,42 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
     })
   );
 }
+
+sendEmail(): void {
+const animalID = this.route.snapshot.queryParams['pet'];
+
+    this.getAnimalNameById(animalID).subscribe(
+      (response) => {
+        const animalName = response.name;
+
+  const emailDetails: EmailDetails = {
+    recipient: this.recipient,
+    msgBody: `Dear cat lover.
+
+We are happy to inform you that we have received your recent inquiry regarding the adoption of ${animalName}. We appreciate your interest in providing a forever home. We understand the excitement and anticipation that comes with adopting a purrfect paw, and we assure you that we will be in touch with you soon to discuss the next steps. 
+    
+If you have any additional questions or concerns in the meantime, please do not hesitate to reach out to us. We are more than happy to assist you and provide any necessary information.
+    
+Thank you for your patience and understanding. 
+    
+Best regards,
+    
+Purrfect Paws team`,
+    subject: `Inquiry for Adoption of ${animalName} Received`,
+  };
+
+this.http.post(`${EMAIL_API}`, emailDetails, { responseType: 'text' }).subscribe({
+    next: () => {
+      console.log("Email sent successfully");      
+    },
+    error: (error) => {
+      console.error("Error sending email", error);
+          },
+          });
+      },
+    );
+}
+
 
 }
 

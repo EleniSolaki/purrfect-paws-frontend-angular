@@ -26,17 +26,17 @@ ngOnInit(): void {
 }
 
 getData(): void {
-  this.appService.setIsLoading(true);
+  // this.appService.setIsLoading(true);
   this.subscription = this.service.getAllFavoriteAnimals().subscribe({
   next: (response: any) => {
       this.favoriteAnimals = response;
         },
     error: (error) => {
-      this.appService.setIsLoading(false);
+      // this.appService.setIsLoading(false);
       console.log(error);
     },
     complete: () => {
-      this.appService.setIsLoading(false);
+      // this.appService.setIsLoading(false);
     }
   });
 }

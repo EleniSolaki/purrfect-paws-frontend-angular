@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+
 export interface MenuItem{
     text: string;
     link: string;
@@ -8,6 +10,7 @@ export interface Alert{
     heading?: string;
     text: string;
     spinner?: boolean; 
+    autoDismiss?: boolean;
 }
 
 export interface UserDTO {
@@ -76,4 +79,10 @@ export interface ClaimInterestRequest {
 export interface SlideInterface {
     url: string;
     title: string;
+}
+
+export interface EmailDetails{
+    recipient: string;
+    msgBody: string;
+    subject: string;
 }
