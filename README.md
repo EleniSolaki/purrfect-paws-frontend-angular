@@ -1,27 +1,9 @@
-# AnimalAdoptionFrontend
+# Purrfect Paws Frontend - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+This project is an Angular-based frontend application, part of a 10-day full-stack application build challenge. You can find the backend [here](https://github.com/EleniSolaki/purrfect-paws-backend-spring). It utilizes the Angular framework to create a dynamic and responsive web application for a cat adoption app. The user can sign up, login and browse among different cats to be adopted. The user can add cats to favourites and start an inquiry for adoption. After successful submission of the form, the user receives a confirmation email. The user can then logout from the app. In the footer of the app, the user can find the company's email, phone, a form to submit a direct message, as well as links for social media. 
 
-## Development server
+# Installation- initialisation 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Ensure you have Node.js and Node Package Manager installed on your machine. Clone the repository or download the source code as a ZIP file. Navigate to the project's root directory. Install the project dependencies using `npm install`.
+To run the Purrfect Paws frontend locally run `ng serve`. The application will be accessible at http://localhost:4200/
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

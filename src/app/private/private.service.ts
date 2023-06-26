@@ -188,7 +188,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
     tap(() => {
       this.alertService.newAlert({
         type: 'success',
-        text: 'We have received your interest in adopting this Purrfect Paw. We will contact you soon.',
+        text: 'We have received your interest in adopting this Purrfect Paw. Check out your email.',
         autoDismiss: true,
       });
       //this.sendEmail()
@@ -216,7 +216,7 @@ const animalID = this.route.snapshot.queryParams['pet'];
     recipient: this.recipient,
     msgBody: `Dear cat lover.
 
-We are happy to inform you that we have received your recent inquiry regarding the adoption of ${animalName}. We appreciate your interest in providing a forever home. We understand the excitement and anticipation that comes with adopting a purrfect paw, and we assure you that we will be in touch with you soon to discuss the next steps. 
+We are happy to inform you that we have received your recent inquiry regarding the adoption of ${animalName}. We appreciate your interest in providing a forever home. We understand the excitement and anticipation that comes with adopting a Purrfect Paw, and we assure you that we will be in touch with you soon to discuss the next steps. 
     
 If you have any additional questions or concerns in the meantime, please do not hesitate to reach out to us. We are more than happy to assist you and provide any necessary information.
     
