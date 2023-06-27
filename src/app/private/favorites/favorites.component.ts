@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PrivateService } from '../private.service';
 import { MyServiceService } from '../../my-service.service';
 import { Animal } from 'shared';

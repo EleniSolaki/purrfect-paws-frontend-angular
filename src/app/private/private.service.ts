@@ -1,11 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, catchError, delay, firstValueFrom, map, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, firstValueFrom, map, tap, throwError } from 'rxjs';
 import { Animal, ClaimInterestRequest, EmailDetails} from 'shared';
 import { MyServiceService } from '../my-service.service';
 import { UiService } from 'ui';
 import { Router } from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 const ANIMAL_API = 'http://localhost:8080/api/animal'
@@ -27,11 +27,6 @@ private loggedInEmailSubject = new BehaviorSubject<string>('');
   private recipient: string ='';
 
   constructor(private http: HttpClient, private appService: MyServiceService, private alertService: UiService, private router: Router, private route: ActivatedRoute) { }
-
-
-
-
-
 
   setRecipient(recipient: string): void {
     this.recipient = recipient;
@@ -110,7 +105,6 @@ getAllFavoriteAnimals(): Observable<Animal[]> {
 
     return this.http.get<Animal[]>(`${FAVORITES_API}/${userId}`).pipe(
       catchError((error) => {
-       // console.error('Error fetching favorite animals:', error);
         return throwError(() => new Error('Error fetching favorite animals. Please try again.')) as Observable<Animal[]>;
       })
       );
@@ -128,7 +122,6 @@ deleteFromFavorites(userId:number, animalId:number){
       });
     }),
     catchError((error) => {
-      //console.error('Error deleting favorite animal:', error);
       return throwError(() => new Error('Error deleting favorite animal. Please try again.'));
     })
   );
@@ -150,7 +143,6 @@ getAnimalNameById(id: number): Observable<{ name: string }> {
         } else {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
-       // console.error(errorMessage);
         return throwError(() => new Error(errorMessage));
       })
     );
