@@ -4,7 +4,7 @@ This project is an Angular-based frontend application, part of a 10-day full-sta
 
 # Installation- initialisation 
 
-Ensure you have Node.js and Node Package Manager installed on your machine. Clone the repository or download the source code as a ZIP file. Navigate to the project's root directory. Install the project dependencies using `npm install`.
+Clone the repository or download the source code as a ZIP file. Navigate to the project's root directory. Install the project dependencies using `npm install`.
 To run the Purrfect Paws frontend locally run `ng serve`. The application will be accessible at http://localhost:4200/
 
 
