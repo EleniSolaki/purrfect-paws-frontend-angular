@@ -19,11 +19,7 @@
         </button>
 
         <div class="float-end position-absolute top-0 end-0">
-          <div class="btn-group me-1">
-            <button mat-button (click)="ngOnInit()">
-              <span class="sr-only">Get All</span>
-            </button>
-          </div>
+          <span class="fw-bold me-1">Get by: </span>
           <div class="btn-group me-1">
             <button
               mat-button
@@ -110,6 +106,11 @@
                 Swedish countryside
               </button>
             </mat-menu>
+          </div>
+          <div class="btn-group me-1">
+            <button mat-button (click)="ngOnInit()">
+              <span class="sr-only">Get All</span>
+            </button>
           </div>
         </div>
       </th>

@@ -180,7 +180,7 @@ adoptionInquiry(claimInterest: ClaimInterestRequest): Observable<void> {
     tap(() => {
       this.alertService.newAlert({
         type: 'success',
-        text: 'We have received your interest in adopting this Purrfect Paw. Check out your email.',
+        text: 'We have received your interest in adopting this Purrfect Paw. Check your email.',
         autoDismiss: true,
       });
       //this.sendEmail()
